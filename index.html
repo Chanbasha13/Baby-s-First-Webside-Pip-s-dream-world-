@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/assets/pip_avatar_cloud.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Pip’s Dream World · Character storybook, celestial atlas, and interactive nursery workshop for Pip the Skull Baby, Apprentice Dream Engineer." />
+    <meta name="theme-color" content="#fff8f1" />
+    <title>Pip’s Dream World · Apprentice Dream Engineer</title>
+    
+    <!-- Instant theme initialization: defaults to Day mode on fresh visit, prevents flash -->
+    <script>
+      (function() {
+        try {
+          var params = new URLSearchParams(window.location.search);
+          var urlTheme = params.get('theme');
+          var stored = localStorage.getItem('pip_theme');
+          var isMidnight = false; // Default to Day mode on fresh visit
+          if (urlTheme === 'midnight' || stored === 'midnight') {
+            isMidnight = true;
+          } else if (urlTheme === 'day' || stored === 'light' || stored === 'day') {
+            isMidnight = false;
+          }
+          if (isMidnight) {
+            document.documentElement.setAttribute('data-theme', 'midnight');
+            var meta = document.querySelector('meta[name="theme-color"]');
+            if (meta) meta.setAttribute('content', '#181222');
+          } else {
+            document.documentElement.setAttribute('data-theme', 'day');
+            var meta = document.querySelector('meta[name="theme-color"]');
+            if (meta) meta.setAttribute('content', '#fff8f1');
+          }
+        } catch (e) {}
+      })();
+    </script>
+    
+    <!-- Google Fonts: Editorial Serif (Fraunces), Playful Rounded (Fredoka), Clean Sans (Plus Jakarta Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=Fredoka:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
+

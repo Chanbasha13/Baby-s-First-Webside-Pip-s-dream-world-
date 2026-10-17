@@ -1,0 +1,203 @@
+/* ==========================================================================
+   Development Screen Styling
+   ========================================================================== */
+
+.dev-screen-wrapper {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: var(--space-2xl) var(--space-lg) var(--space-3xl);
+}
+
+.dev-header {
+  text-align: center;
+  margin-bottom: var(--space-3xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dev-banner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.dev-status-pill {
+  font-family: var(--font-playful-rounded);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #2e7d32;
+  background-color: #e8f5e9;
+  border: 1px solid #c8e6c9;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+}
+
+.dev-title {
+  color: var(--color-berry);
+  margin-bottom: var(--space-sm);
+  letter-spacing: -0.02em;
+}
+
+.dev-subtitle {
+  max-width: 620px;
+  font-size: 1.1rem;
+  margin-bottom: var(--space-xl);
+  color: var(--color-text-muted);
+}
+
+.dev-tokens-strip {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.token-swatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-warm);
+  background: white;
+  min-width: 110px;
+  box-shadow: var(--shadow-sm);
+}
+
+.token-swatch .swatch-label {
+  font-size: 0.8rem;
+  font-family: var(--font-playful-rounded);
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.token-swatch code {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.swatch-cream {
+  border-bottom: 4px solid #fff8f1;
+}
+
+.swatch-berry {
+  border-bottom: 4px solid #a34063;
+}
+
+.swatch-brown {
+  border-bottom: 4px solid #3d271d;
+}
+
+.swatch-gold {
+  border-bottom: 4px solid #f4b248;
+}
+
+.dev-content {
+  margin-bottom: var(--space-3xl);
+}
+
+.section-heading-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: var(--space-lg);
+  border-bottom: 1.5px dashed var(--color-border-warm);
+  padding-bottom: var(--space-sm);
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.section-title {
+  color: var(--color-text-main);
+  font-size: 1.4rem;
+}
+
+.assets-count {
+  font-family: var(--font-playful-rounded);
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+}
+
+.assets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: var(--space-lg);
+}
+
+.asset-card {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.asset-media-frame {
+  aspect-ratio: 1 / 1;
+  background: linear-gradient(135deg, #fffcf8 0%, #fef3e5 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+  border-bottom: 1px solid var(--color-border-subtle);
+  overflow: hidden;
+}
+
+.asset-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: transform var(--transition-normal);
+}
+
+.asset-card:hover .asset-image {
+  transform: scale(1.05);
+}
+
+.asset-details {
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.asset-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-xs);
+}
+
+.asset-filename {
+  font-size: 0.72rem;
+  background-color: var(--color-warm-cream);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border-subtle);
+}
+
+.asset-title {
+  font-size: 1.1rem;
+  margin-bottom: var(--space-2xs);
+  color: var(--color-text-main);
+}
+
+.asset-description {
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: var(--color-text-muted);
+}
+
+.dev-footer {
+  text-align: center;
+  padding: var(--space-lg);
+  border-top: 1.5px dashed var(--color-border-warm);
+  font-family: var(--font-playful-rounded);
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+}
+

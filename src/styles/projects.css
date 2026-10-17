@@ -1,0 +1,849 @@
+/* ==========================================================================
+   Pip's Dream World — Projects Section Styles
+   Three Distinct Showcase Experiences
+   ========================================================================== */
+
+.projects-section {
+  padding: var(--space-4xl) 0;
+  position: relative;
+  background: var(--bg-projects);
+  border-top: 1.5px solid var(--color-border-warm);
+  border-bottom: 1.5px solid var(--color-border-warm);
+  overflow: hidden;
+  transition: background var(--transition-slow);
+}
+
+.projects-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(1.5px 1.5px at 12% 18%, rgba(244, 178, 72, 0.45) 100%, transparent),
+    radial-gradient(2px 2px at 84% 22%, rgba(163, 64, 99, 0.35) 100%, transparent),
+    radial-gradient(1.5px 1.5px at 45% 12%, rgba(244, 178, 72, 0.4) 100%, transparent),
+    radial-gradient(2px 2px at 92% 76%, rgba(244, 178, 72, 0.4) 100%, transparent),
+    radial-gradient(1.5px 1.5px at 8% 82%, rgba(138, 182, 214, 0.45) 100%, transparent),
+    radial-gradient(ellipse at 15% 20%, rgba(244, 178, 72, 0.10) 0%, transparent 48%),
+    radial-gradient(ellipse at 85% 65%, rgba(163, 64, 99, 0.08) 0%, transparent 52%),
+    radial-gradient(ellipse at 50% 90%, rgba(138, 182, 214, 0.08) 0%, transparent 48%);
+  z-index: 0;
+}
+
+[data-theme="midnight"] .projects-section::before {
+  background-image:
+    radial-gradient(1.5px 1.5px at 12% 18%, rgba(255, 209, 102, 0.7) 100%, transparent),
+    radial-gradient(2px 2px at 84% 22%, rgba(255, 209, 102, 0.6) 100%, transparent),
+    radial-gradient(1.5px 1.5px at 45% 12%, rgba(156, 208, 240, 0.65) 100%, transparent),
+    radial-gradient(2px 2px at 92% 76%, rgba(255, 209, 102, 0.6) 100%, transparent),
+    radial-gradient(1.5px 1.5px at 8% 82%, rgba(199, 90, 132, 0.65) 100%, transparent),
+    radial-gradient(ellipse at 15% 20%, rgba(255, 209, 102, 0.10) 0%, transparent 48%),
+    radial-gradient(ellipse at 85% 65%, rgba(199, 90, 132, 0.11) 0%, transparent 52%),
+    radial-gradient(ellipse at 50% 90%, rgba(156, 208, 240, 0.09) 0%, transparent 48%);
+}
+
+.projects-section > .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Section Header Typography & Spacing */
+.projects-section .section-header-block {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto var(--space-2xl);
+}
+
+.projects-section .section-title {
+  color: var(--color-text-main);
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  line-height: 1.2;
+  margin-top: var(--space-xs);
+  margin-bottom: var(--space-xs);
+}
+
+.projects-section .section-description {
+  color: var(--color-text-muted);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.projects-showcase-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3xl);
+}
+
+/* Base Project Showcase Card */
+.project-showcase-card {
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border-warm);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 320ms cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 250ms ease;
+}
+
+.project-showcase-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-berry-border);
+  box-shadow: var(--shadow-md), 0 12px 32px rgba(163, 64, 99, 0.08);
+}
+
+[data-theme="midnight"] .project-showcase-card:hover {
+  border-color: var(--color-accent-gold-border);
+  box-shadow: var(--shadow-lg), 0 12px 36px rgba(255, 209, 102, 0.12);
+}
+
+.project-showcase-card:focus-within {
+  border-color: var(--color-berry);
+}
+
+/* Storybook Differentiated Showcase Frames (Acoustic Bench, Lantern Alcove, Drafting Desk) */
+.project-card-acoustic {
+  position: relative;
+  background: radial-gradient(circle at 10% 50%, rgba(244, 178, 72, 0.05) 0%, var(--color-surface) 65%);
+  box-shadow: 0 0 0 1px rgba(244, 178, 72, 0.18) inset, var(--shadow-sm);
+}
+
+[data-theme="midnight"] .project-card-acoustic {
+  background: radial-gradient(circle at 10% 50%, rgba(255, 209, 102, 0.08) 0%, var(--color-surface) 70%);
+  box-shadow: 0 0 0 1px rgba(255, 209, 102, 0.22) inset, var(--shadow-sm);
+}
+
+.project-card-lantern {
+  position: relative;
+  background: radial-gradient(circle at 20% 40%, rgba(235, 140, 75, 0.06) 0%, var(--color-surface) 65%);
+  box-shadow: 0 0 0 1px rgba(235, 140, 75, 0.2) inset, var(--shadow-sm);
+}
+
+[data-theme="midnight"] .project-card-lantern {
+  background: radial-gradient(circle at 20% 40%, rgba(255, 185, 90, 0.09) 0%, var(--color-surface) 70%);
+  box-shadow: 0 0 0 1px rgba(255, 185, 90, 0.25) inset, var(--shadow-sm);
+}
+
+.project-card-drafting {
+  position: relative;
+  background: radial-gradient(circle at 15% 45%, rgba(138, 182, 214, 0.06) 0%, var(--color-surface) 65%);
+  box-shadow: 0 0 0 1px rgba(138, 182, 214, 0.22) inset, var(--shadow-sm);
+}
+
+[data-theme="midnight"] .project-card-drafting {
+  background: radial-gradient(circle at 15% 45%, rgba(156, 208, 240, 0.08) 0%, var(--color-surface) 70%);
+  box-shadow: 0 0 0 1px rgba(156, 208, 240, 0.25) inset, var(--shadow-sm);
+}
+
+.project-showcase-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .project-showcase-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   Project 01: Lullaby Lab Styles & Audio Visualizer
+   ========================================================================== */
+
+.lullaby-media-frame {
+  position: relative;
+  background: linear-gradient(135deg, #fdfbf7 0%, #f6ece0 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-xl);
+  height: 100%;
+  min-height: 360px;
+  border-right: 1.5px solid var(--color-border-subtle);
+  transition: background var(--transition-normal);
+}
+
+[data-theme="midnight"] .lullaby-media-frame {
+  background: radial-gradient(circle at 50% 40%, rgba(255, 209, 102, 0.08) 0%, #1f162c 75%);
+  border-right-color: #3b2c4c;
+}
+
+@media (max-width: 900px) {
+  .lullaby-media-frame {
+    border-right: none;
+    border-bottom: 1.5px solid var(--color-border-subtle);
+  }
+}
+
+/* ==========================================================================
+   Project Artwork Frame Architecture
+   Tailored aspect ratios matching intrinsic product artwork dimensions:
+   - Lullaby Lab: 1024x924 (aspect-ratio: 1024 / 924)
+   - Nightlight Collection: 1024x914 (aspect-ratio: 1024 / 914)
+   - Delivery Routes: 340x220 (aspect-ratio: 340 / 220)
+   Guarantees 0px empty vertical letterboxing with zero distortion or stretch
+   ========================================================================== */
+
+.project-artwork-frame {
+  position: relative;
+  width: 100%;
+  max-width: 330px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1.5px solid var(--color-border-warm);
+  background-color: #ebd5c5; /* Matches exact natural border tone of Pip artwork */
+  box-shadow: 0 8px 24px rgba(61, 39, 29, 0.10), inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+[data-theme="midnight"] .project-artwork-frame {
+  background-color: #1f162c;
+  border-color: #4b3861;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 209, 102, 0.12);
+}
+
+.project-showcase-card:hover .project-artwork-frame {
+  transform: scale(1.02);
+  border-color: var(--color-berry-border);
+  box-shadow: 0 12px 32px rgba(61, 39, 29, 0.14), inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+}
+
+[data-theme="midnight"] .project-showcase-card:hover .project-artwork-frame {
+  border-color: var(--color-accent-gold);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 24px rgba(255, 209, 102, 0.2);
+}
+
+.project-artwork-lullaby {
+  aspect-ratio: 1024 / 924;
+}
+
+.project-artwork-nightlight {
+  aspect-ratio: 1024 / 914;
+}
+
+.project-artwork-routes {
+  aspect-ratio: 340 / 220;
+  max-width: 340px;
+  background-color: var(--color-surface);
+}
+
+.project-artwork-img {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+  border-radius: calc(var(--radius-lg) - 1.5px);
+  transition: transform var(--transition-normal);
+}
+
+.lullaby-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Animated Sound Waveform Bars */
+.lullaby-waveform-bar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  height: 28px;
+  margin-top: var(--space-md);
+}
+
+.wave-bar {
+  width: 4px;
+  height: 8px;
+  background-color: var(--color-berry);
+  border-radius: var(--radius-pill);
+  transition: height 150ms ease;
+}
+
+.wave-bar.is-playing {
+  animation: waveDance 0.8s ease-in-out infinite alternate;
+}
+
+.wb-1 { animation-delay: 0.1s; }
+.wb-2 { animation-delay: 0.3s; }
+.wb-3 { animation-delay: 0.5s; }
+.wb-4 { animation-delay: 0.2s; }
+.wb-5 { animation-delay: 0.4s; }
+
+@keyframes waveDance {
+  0% { height: 6px; }
+  100% { height: 26px; }
+}
+
+.lullaby-controls-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+  flex-wrap: wrap;
+}
+
+@media (max-width: 480px) {
+  .lullaby-controls-row {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .audio-play-btn {
+    width: 100%;
+    justify-content: center;
+    min-height: 44px;
+  }
+}
+
+.audio-play-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-playful-rounded);
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1.5px solid var(--color-berry);
+  background-color: var(--color-berry);
+  color: #ffffff;
+  transition: all var(--transition-fast);
+  box-shadow: 0 4px 12px rgba(163, 64, 99, 0.25);
+  min-height: 42px;
+}
+
+.audio-play-btn:hover {
+  background-color: var(--color-berry-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(163, 64, 99, 0.35);
+}
+
+[data-theme="midnight"] .audio-play-btn {
+  background-color: var(--color-berry);
+  border-color: var(--color-berry);
+  box-shadow: 0 4px 14px rgba(201, 92, 135, 0.35), 0 0 16px rgba(201, 92, 135, 0.18);
+}
+
+[data-theme="midnight"] .audio-play-btn:hover {
+  background-color: var(--color-berry-hover);
+  border-color: var(--color-berry-hover);
+  box-shadow: 0 6px 20px rgba(201, 92, 135, 0.5), 0 0 24px rgba(255, 209, 102, 0.2);
+}
+
+.audio-play-btn.is-active {
+  background-color: #388e3c;
+  border-color: #2e7d32;
+  box-shadow: 0 4px 12px rgba(46, 125, 50, 0.3);
+}
+
+.audio-status-pill {
+  font-family: var(--font-playful-rounded);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  padding: 6px 12px;
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border-warm);
+  border-radius: var(--radius-pill);
+  transition: all var(--transition-fast);
+}
+
+.audio-status-pill.is-active {
+  color: #2e7d32;
+  border-color: #a5d6a7;
+  background-color: #e8f5e9;
+}
+
+[data-theme="midnight"] .audio-status-pill.is-active {
+  color: #a5d6a7;
+  border-color: #388e3c;
+  background-color: #172b1d;
+}
+
+.audio-status-pill.audio-pill-warning {
+  color: #c62828;
+  border-color: #ef9a9a;
+  background-color: #ffebee;
+}
+
+[data-theme="midnight"] .audio-status-pill.audio-pill-warning {
+  color: #ef9a9a;
+  border-color: #c62828;
+  background-color: #2b1717;
+}
+
+/* ==========================================================================
+   Project 02: Nightlight Collection Styles & Light Toggle
+   ========================================================================== */
+
+.nightlight-media-frame {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-xl);
+  height: 100%;
+  min-height: 360px;
+  border-right: 1.5px solid var(--color-border-subtle);
+  transition: background var(--transition-slow);
+}
+
+@media (max-width: 900px) {
+  .nightlight-media-frame {
+    border-right: none;
+    border-bottom: 1.5px solid var(--color-border-subtle);
+  }
+}
+
+.nightlight-media-frame.mode-dim {
+  background: radial-gradient(circle at 50% 50%, rgba(244, 178, 72, 0.15) 0%, var(--color-bg) 75%);
+}
+
+.nightlight-media-frame.mode-bright {
+  background: radial-gradient(circle at 50% 50%, rgba(255, 218, 120, 0.45) 0%, rgba(244, 178, 72, 0.25) 50%, var(--color-bg) 85%);
+}
+
+.nightlight-halo-glow {
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  border-radius: var(--radius-pill);
+  pointer-events: none;
+  transition: all var(--transition-slow);
+}
+
+.mode-dim .nightlight-halo-glow {
+  box-shadow: 0 0 45px rgba(244, 178, 72, 0.35);
+}
+
+.mode-bright .nightlight-halo-glow {
+  box-shadow: 0 0 95px rgba(255, 209, 102, 0.75), 0 0 40px rgba(244, 178, 72, 0.5);
+}
+
+.nightlight-img {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: filter var(--transition-slow);
+}
+
+.mode-bright .project-artwork-nightlight {
+  border-color: var(--color-accent-gold);
+  box-shadow: 0 8px 32px rgba(255, 209, 102, 0.6), 0 0 20px rgba(244, 178, 72, 0.35);
+}
+
+[data-theme="midnight"] .mode-bright .project-artwork-nightlight {
+  border-color: var(--color-accent-gold);
+  box-shadow: 0 12px 36px rgba(255, 209, 102, 0.5), 0 0 28px rgba(255, 209, 102, 0.3);
+}
+
+/* Light / Dim Toggle Switch Component */
+.light-switch-wrap {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+  flex-wrap: wrap;
+}
+
+@media (max-width: 480px) {
+  .light-switch-wrap {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .lantern-toggle-btn {
+    width: 100%;
+    justify-content: center;
+    min-height: 44px;
+  }
+}
+
+.lantern-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-playful-rounded);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1.5px solid var(--color-accent-gold);
+  background-color: var(--color-surface);
+  color: var(--color-text-main);
+  box-shadow: var(--shadow-xs);
+  transition: all var(--transition-fast);
+  min-height: 42px;
+}
+
+.lantern-toggle-btn:hover {
+  background-color: var(--color-accent-gold-soft);
+  transform: translateY(-2px);
+}
+
+.lantern-toggle-btn.is-radiant {
+  background-color: var(--color-accent-gold);
+  color: #3d271d;
+  box-shadow: 0 4px 16px rgba(244, 178, 72, 0.4);
+}
+
+/* ==========================================================================
+   Project 03: Dream Delivery Routes & Interactive Map
+   ========================================================================== */
+
+.delivery-map-media-frame {
+  position: relative;
+  padding: var(--space-lg);
+  background: var(--color-bg);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-right: 1.5px solid var(--color-border-subtle);
+}
+
+@media (max-width: 900px) {
+  .delivery-map-media-frame {
+    border-right: none;
+    border-bottom: 1.5px solid var(--color-border-subtle);
+  }
+}
+
+.interactive-route-svg {
+  width: 100%;
+  height: auto;
+  max-height: 280px;
+  border-radius: var(--radius-md);
+}
+
+/* Stardust Animated Trajectory Path */
+.route-trajectory-path {
+  stroke-dasharray: 6 6;
+  animation: routeDashFlow 22s linear infinite;
+}
+
+@keyframes routeDashFlow {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -120;
+  }
+}
+
+.map-waypoint-btn {
+  cursor: pointer;
+  outline: none;
+  transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1), filter 220ms ease;
+}
+
+.map-waypoint-btn:hover {
+  transform: scale(1.18);
+  filter: drop-shadow(0 0 8px rgba(163, 64, 99, 0.5));
+}
+
+.map-waypoint-btn:focus-visible {
+  outline: 2px dashed var(--color-berry);
+  outline-offset: 4px;
+}
+
+/* Radiating Pulse Wave for Selected Waypoint */
+.waypoint-pulse-active {
+  fill: none;
+  stroke-width: 1.5;
+  stroke-dasharray: 3 3;
+  animation: waypointPulseWave 2.4s ease-out infinite;
+  transform-origin: center;
+}
+
+@keyframes waypointPulseWave {
+  0% {
+    r: 12;
+    opacity: 1;
+    transform: scale(0.95);
+  }
+  60% {
+    r: 22;
+    opacity: 0.5;
+  }
+  100% {
+    r: 28;
+    opacity: 0;
+    transform: scale(1.15);
+  }
+}
+
+/* Waypoint Details Pill Buttons Row */
+.waypoint-selector-row {
+  display: flex;
+  gap: 8px;
+  margin-top: var(--space-md);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.waypoint-chip {
+  background: none;
+  border: 1.5px solid var(--color-border-warm);
+  background-color: var(--color-surface);
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-playful-rounded);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.waypoint-chip:hover {
+  border-color: var(--color-berry-border);
+  color: var(--color-berry);
+  transform: translateY(-1px);
+}
+
+.waypoint-chip.is-active {
+  background-color: var(--color-berry);
+  color: #ffffff;
+  border-color: var(--color-berry);
+  box-shadow: 0 3px 10px rgba(163, 64, 99, 0.25);
+  transform: translateY(-1px);
+}
+
+/* Route Dispatch Box */
+.route-dispatch-card {
+  margin-top: var(--space-md);
+  padding: var(--space-md);
+  background-color: var(--color-surface);
+  border: 1.5px dashed var(--color-border-warm);
+  border-radius: var(--radius-md);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--color-text-muted);
+  animation: dispatchCardEnter 240ms ease-out;
+}
+
+@keyframes dispatchCardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dispatch-header {
+  font-family: var(--font-playful-rounded);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-berry);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+/* Project Text Showcase Body */
+.project-showcase-body {
+  padding: var(--space-2xl);
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 600px) {
+  .project-showcase-body {
+    padding: var(--space-lg);
+  }
+}
+
+.showcase-header-tag {
+  font-family: var(--font-playful-rounded);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--color-berry);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-2xs);
+}
+
+.showcase-title {
+  color: var(--color-text-main);
+  font-size: clamp(1.5rem, 3.2vw, 2.1rem);
+  margin-bottom: var(--space-sm);
+  line-height: 1.2;
+}
+
+.showcase-text {
+  font-size: 1.02rem;
+  line-height: 1.65;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-lg);
+}
+
+.showcase-feature-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: var(--space-lg);
+}
+
+.showcase-pill {
+  font-family: var(--font-playful-rounded);
+  font-size: 0.8rem;
+  font-weight: 600;
+  background-color: var(--color-surface-subtle);
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border-warm);
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+}
+
+/* Specs Details Drawer */
+.showcase-specs-toggle-btn {
+  background: none;
+  border: 1px solid var(--color-border-warm);
+  background-color: var(--color-bg);
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-playful-rounded);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  align-self: flex-start;
+  transition: all var(--transition-fast);
+}
+
+.showcase-specs-toggle-btn:hover {
+  color: var(--color-berry);
+  border-color: var(--color-berry-border);
+}
+
+.showcase-drawer-panel {
+  margin-top: var(--space-md);
+  padding: var(--space-md);
+  background-color: var(--color-bg);
+  border: 1.5px dashed var(--color-border-warm);
+  border-radius: var(--radius-md);
+  font-size: 0.86rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+.drawer-specs-title {
+  font-family: var(--font-playful-rounded);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-berry);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+/* Story Bridge to Catch the Falling Dreams Mini-Game */
+.projects-game-invite-card {
+  margin-top: var(--space-2xl);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  padding: var(--space-xl) var(--space-2xl);
+  background: linear-gradient(135deg, var(--color-surface-subtle) 0%, var(--color-accent-gold-soft) 100%);
+  border: 2px dashed var(--color-accent-gold-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-normal);
+}
+
+[data-theme="midnight"] .projects-game-invite-card {
+  background: linear-gradient(135deg, #271f37 0%, #302422 100%);
+  border-color: #6d5138;
+}
+
+.projects-game-invite-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-accent-gold);
+}
+
+.invite-content {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.invite-sparkle {
+  font-size: 2rem;
+  color: var(--color-accent-gold);
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.invite-title {
+  font-family: var(--font-editorial-serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin: 0 0 4px;
+}
+
+.invite-text {
+  font-size: 0.92rem;
+  color: var(--color-text-muted);
+  line-height: 1.45;
+  margin: 0;
+}
+
+.invite-btn {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .projects-game-invite-card {
+    flex-direction: column;
+    text-align: center;
+    padding: var(--space-lg);
+  }
+
+  .invite-content {
+    flex-direction: column;
+  }
+
+  .invite-btn {
+    width: 100%;
+  }
+}
+
+
+/* Accessibility: Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .project-showcase-card,
+  .route-trajectory-path,
+  .waypoint-pulse-active,
+  .route-dispatch-card,
+  .map-waypoint-btn {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}

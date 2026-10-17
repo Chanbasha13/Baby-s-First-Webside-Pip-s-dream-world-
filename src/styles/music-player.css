@@ -1,0 +1,447 @@
+/* ==========================================================================
+   Pip's Dream World — Bedtime Music Player Styles
+   ========================================================================== */
+
+.bedtime-player-dock {
+  position: fixed;
+  bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  right: calc(20px + env(safe-area-inset-right, 0px));
+  z-index: 920;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.5px solid var(--color-border-warm);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md), 0 0 20px rgba(244, 178, 72, 0.12);
+  padding: 8px 12px;
+  transition: all var(--transition-normal);
+  user-select: none;
+  max-width: 320px;
+}
+
+.bedtime-player-dock.near-footer {
+  box-shadow: var(--shadow-sm), 0 0 16px rgba(244, 178, 72, 0.1);
+  border-color: var(--color-border-subtle);
+  background-color: rgba(255, 255, 255, 0.96);
+}
+
+[data-theme="midnight"] .bedtime-player-dock.near-footer {
+  background-color: rgba(30, 22, 42, 0.96);
+  border-color: var(--color-border-subtle);
+}
+
+[data-theme="midnight"] .bedtime-player-dock {
+  background-color: rgba(34, 26, 48, 0.92);
+  border-color: var(--color-border-warm);
+  box-shadow: var(--shadow-lg), 0 0 24px rgba(255, 209, 102, 0.15);
+}
+
+.bedtime-player-dock.is-playing {
+  border-color: var(--color-accent-gold);
+  box-shadow: var(--shadow-lg), 0 0 28px rgba(244, 178, 72, 0.25);
+}
+
+[data-theme="midnight"] .bedtime-player-dock.is-playing {
+  border-color: var(--color-accent-gold);
+  box-shadow: var(--shadow-lg), 0 0 32px rgba(255, 209, 102, 0.3);
+}
+
+.bedtime-player-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Main Capsule Row */
+.bedtime-player-main-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Play/Pause Button */
+.bedtime-play-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-pill);
+  background: var(--color-berry);
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  box-shadow: 0 3px 8px rgba(163, 64, 99, 0.35);
+  transition: transform var(--transition-fast), background-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.bedtime-play-btn:hover {
+  background: var(--color-berry-hover);
+  transform: scale(1.06);
+  box-shadow: 0 4px 12px rgba(163, 64, 99, 0.45);
+}
+
+.bedtime-play-btn:active {
+  transform: scale(0.96);
+}
+
+.bedtime-play-btn.active {
+  background: var(--color-berry-active);
+  box-shadow: 0 0 14px rgba(244, 178, 72, 0.5);
+}
+
+[data-theme="midnight"] .bedtime-play-btn.active {
+  box-shadow: 0 0 18px rgba(255, 209, 102, 0.6);
+}
+
+.bedtime-play-btn svg {
+  display: block;
+}
+
+/* Player Info */
+.bedtime-player-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  cursor: pointer;
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.bedtime-player-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.bedtime-player-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.bedtime-sparkle {
+  font-size: 0.85rem;
+  line-height: 1;
+}
+
+.bedtime-title-text {
+  font-family: var(--font-playful-rounded);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text-main);
+  white-space: nowrap;
+}
+
+.bedtime-player-subtext {
+  font-size: 0.725rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.bedtime-error-note {
+  color: #d9383a;
+  font-weight: 600;
+}
+
+.bedtime-wake-note {
+  color: var(--color-berry);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.bedtime-play-btn.wake-prompt-btn {
+  animation: gentle-wake-pulse 2.8s ease-in-out infinite;
+}
+
+@keyframes gentle-wake-pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 3px 8px rgba(163, 64, 99, 0.35);
+  }
+  50% {
+    transform: scale(1.06);
+    box-shadow: 0 4px 14px rgba(244, 178, 72, 0.5);
+  }
+}
+
+/* Animated Sound Bars */
+.bedtime-sound-bars {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2.5px;
+  height: 14px;
+  margin-left: 2px;
+}
+
+.sound-bar {
+  width: 2.5px;
+  height: 4px;
+  background-color: var(--color-accent-gold);
+  border-radius: 1px;
+  transition: height 0.2s ease;
+}
+
+[data-theme="midnight"] .sound-bar {
+  background-color: var(--color-accent-gold);
+}
+
+.bedtime-sound-bars.animating .bar-1 {
+  animation: bedtime-eq 0.9s ease-in-out infinite alternate;
+}
+
+.bedtime-sound-bars.animating .bar-2 {
+  animation: bedtime-eq 0.75s ease-in-out 0.2s infinite alternate;
+}
+
+.bedtime-sound-bars.animating .bar-3 {
+  animation: bedtime-eq 1.1s ease-in-out 0.4s infinite alternate;
+}
+
+.bedtime-sound-bars.animating .bar-4 {
+  animation: bedtime-eq 0.8s ease-in-out 0.15s infinite alternate;
+}
+
+@keyframes bedtime-eq {
+  0% {
+    height: 3px;
+    opacity: 0.5;
+  }
+  100% {
+    height: 14px;
+    opacity: 1;
+  }
+}
+
+/* Expand / Collapse Button */
+.bedtime-expand-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-subtle);
+  border: 1px solid var(--color-border-warm);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all var(--transition-fast);
+}
+
+.bedtime-expand-btn:hover {
+  color: var(--color-berry);
+  background: var(--color-surface);
+}
+
+.expand-chevron {
+  transition: transform var(--transition-normal);
+}
+
+.expand-chevron.rotated {
+  transform: rotate(180deg);
+}
+
+/* Tray / Expanded Controls */
+.bedtime-player-tray {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--color-border-warm);
+  animation: bedtime-slide-down 0.2s ease-out;
+}
+
+@keyframes bedtime-slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.bedtime-volume-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bedtime-mute-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  border: 1px solid var(--color-border-warm);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all var(--transition-fast);
+}
+
+.bedtime-mute-btn:hover {
+  color: var(--color-berry);
+  border-color: var(--color-berry);
+}
+
+.bedtime-mute-btn.muted {
+  color: var(--color-berry);
+  background: var(--color-berry-soft);
+}
+
+[data-theme="midnight"] .bedtime-expand-btn,
+[data-theme="midnight"] .bedtime-mute-btn {
+  background: #271d37;
+  border-color: #4b375f;
+  color: var(--color-text-muted);
+}
+
+[data-theme="midnight"] .bedtime-expand-btn:hover,
+[data-theme="midnight"] .bedtime-mute-btn:hover {
+  border-color: var(--color-accent-gold);
+  color: var(--color-accent-gold);
+  background: #322546;
+}
+
+[data-theme="midnight"] .bedtime-mute-btn.muted {
+  background: rgba(199, 90, 132, 0.25);
+  border-color: var(--color-berry);
+  color: #ffd166;
+}
+
+/* Volume Slider */
+.bedtime-volume-slider {
+  flex-grow: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 5px;
+  border-radius: var(--radius-pill);
+  background: var(--color-border-warm);
+  outline: none;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+[data-theme="midnight"] .bedtime-volume-slider {
+  background: #3e2e50;
+}
+
+.bedtime-volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--color-berry);
+  border: 2px solid #ffffff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  transition: transform 0.12s ease;
+}
+
+[data-theme="midnight"] .bedtime-volume-slider::-webkit-slider-thumb {
+  background: var(--color-accent-gold);
+  border: 2px solid #181222;
+  box-shadow: 0 0 8px rgba(255, 209, 102, 0.45);
+}
+
+.bedtime-volume-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.bedtime-volume-slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--color-berry);
+  border: 2px solid #ffffff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+[data-theme="midnight"] .bedtime-volume-slider::-moz-range-thumb {
+  background: var(--color-accent-gold);
+  border: 2px solid #181222;
+}
+
+.bedtime-vol-percent {
+  font-size: 0.725rem;
+  font-family: var(--font-playful-rounded);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  min-width: 30px;
+  text-align: right;
+}
+
+.bedtime-tray-footer {
+  display: flex;
+  justify-content: center;
+}
+
+.bedtime-independent-badge {
+  font-size: 0.675rem;
+  color: var(--color-text-light);
+  font-style: italic;
+}
+
+/* ==========================================================================
+   Responsive Adaptations
+   ========================================================================== */
+@media (max-width: 768px) {
+  .bedtime-player-dock {
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    right: calc(16px + env(safe-area-inset-right, 0px));
+    max-width: 290px;
+  }
+}
+
+@media (max-width: 480px) {
+  .bedtime-player-dock {
+    bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+    right: calc(10px + env(safe-area-inset-right, 0px));
+    max-width: calc(100vw - 20px);
+    padding: 6px 10px;
+  }
+
+  .bedtime-player-dock.near-footer {
+    padding: 5px 8px;
+    max-width: calc(100vw - 20px);
+  }
+
+  .bedtime-play-btn {
+    width: 34px;
+    height: 34px;
+  }
+
+  .bedtime-title-text {
+    font-size: 0.8125rem;
+  }
+}
+
+/* Accessibility: Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .bedtime-sound-bars.animating .sound-bar {
+    animation: none;
+    height: 8px;
+  }
+}
+
+/* Print */
+@media print {
+  .bedtime-player-dock {
+    display: none !important;
+  }
+}
+

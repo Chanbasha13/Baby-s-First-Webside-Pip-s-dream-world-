@@ -1,0 +1,688 @@
+/* ==========================================================================
+   Pip's Dream World — Navigation Bar Styles (Part 14 Refinement)
+   Responsive, cohesive across both themes, subtle gold accents, zero wrapping
+   ========================================================================== */
+
+.nav-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  background-color: rgba(255, 248, 241, 0.92);
+  border-bottom: 1.5px solid var(--color-border-warm);
+  transition: background-color var(--transition-normal), border-color var(--transition-normal);
+}
+
+[data-theme="midnight"] .nav-header {
+  background-color: rgba(24, 18, 34, 0.94);
+  border-bottom-color: rgba(68, 52, 82, 0.7);
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+  gap: var(--space-md);
+}
+
+/* ==========================================================================
+   Brand Identity (Left)
+   ========================================================================== */
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.nav-avatar-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-pill);
+  background: var(--color-berry-soft);
+  border: 1.5px solid var(--color-berry-border);
+  padding: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: var(--shadow-xs);
+  transition: transform var(--transition-fast);
+}
+
+.nav-brand:hover .nav-avatar-wrap {
+  transform: scale(1.08) rotate(-4deg);
+}
+
+[data-theme="midnight"] .nav-avatar-wrap {
+  background: #34223d;
+  border-color: #6d415b;
+}
+
+.nav-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-pill);
+}
+
+.nav-brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-brand-title {
+  font-family: var(--font-editorial-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-berry);
+  line-height: 1.15;
+  white-space: nowrap;
+}
+
+[data-theme="midnight"] .nav-brand-title {
+  color: var(--color-accent-gold);
+}
+
+.nav-brand-sub {
+  font-family: var(--font-playful-rounded);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+[data-theme="midnight"] .nav-brand-sub {
+  color: #c4b1d6;
+}
+
+/* ==========================================================================
+   Desktop Navigation Links (Center) — No Awkward Text Wrapping
+   ========================================================================== */
+.nav-desktop-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 auto;
+}
+
+.nav-desktop-links {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  flex-wrap: nowrap;
+}
+
+.nav-link {
+  font-family: var(--font-playful-rounded);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--color-text-main);
+  padding: 6px 11px;
+  border-radius: var(--radius-pill);
+  transition: color var(--transition-fast), background-color var(--transition-fast), text-shadow var(--transition-fast);
+  position: relative;
+  text-decoration: none;
+  white-space: nowrap !important; /* Strictly prevents 'Catch Dreams' from wrapping */
+}
+
+.nav-link:hover {
+  color: var(--color-berry);
+  background-color: var(--color-berry-soft);
+  text-shadow: 0 0 8px rgba(163, 64, 99, 0.2);
+}
+
+[data-theme="midnight"] .nav-link {
+  color: #e5d7cf;
+}
+
+[data-theme="midnight"] .nav-link:hover {
+  color: var(--color-accent-gold);
+  background-color: rgba(255, 209, 102, 0.1);
+  text-shadow: 0 0 10px rgba(255, 209, 102, 0.4);
+}
+
+/* ==========================================================================
+   Action Controls (Right) — Unified Height, Matching Radii & Visual Weight
+   ========================================================================== */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+/* Unified Control Button Standard (Chimes, Bedtime Music, Theme Toggle) */
+.nav-ctrl-btn {
+  height: 38px;
+  padding: 0 13px;
+  background-color: var(--color-surface);
+  border: 1.5px solid var(--color-border-warm);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-playful-rounded);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-text-main);
+  cursor: pointer;
+  box-shadow: var(--shadow-xs);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  white-space: nowrap;
+  transition: transform var(--transition-fast), border-color var(--transition-fast), background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.nav-ctrl-btn:hover {
+  transform: translateY(-1px);
+  border-color: var(--color-berry-border);
+  background-color: var(--color-surface-subtle);
+  color: var(--color-berry);
+}
+
+.nav-ctrl-btn:focus-visible {
+  outline: 2px solid var(--color-berry);
+  outline-offset: 2px;
+}
+
+/* Midnight mode theme overrides for control buttons: subtle gold accents */
+[data-theme="midnight"] .nav-ctrl-btn {
+  background-color: #271f37;
+  border-color: rgba(68, 52, 82, 0.9);
+  color: #fff5ed;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+[data-theme="midnight"] .nav-ctrl-btn:hover {
+  border-color: rgba(255, 209, 102, 0.45);
+  background-color: #312645;
+  color: var(--color-accent-gold);
+}
+
+[data-theme="midnight"] .nav-ctrl-btn:focus-visible {
+  outline: 2px solid rgba(255, 209, 102, 0.65);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px rgba(255, 209, 102, 0.15);
+}
+
+.ctrl-icon {
+  font-size: 0.95rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ctrl-label {
+  letter-spacing: 0.02em;
+}
+
+/* Specific button accents */
+.sound-toggle-btn.is-active {
+  border-color: var(--color-border-warm);
+}
+
+[data-theme="midnight"] .sound-toggle-btn.is-active {
+  border-color: rgba(68, 52, 82, 0.9);
+}
+
+/* ==========================================================================
+   Bedtime Music Control Group
+   ========================================================================== */
+.nav-music-group {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.music-toggle-btn.is-playing {
+  border-color: var(--color-berry);
+  background-color: var(--color-berry-soft);
+  color: var(--color-berry);
+}
+
+[data-theme="midnight"] .music-toggle-btn.is-playing {
+  border-color: rgba(255, 209, 102, 0.5);
+  background-color: #382845;
+  color: var(--color-accent-gold);
+  box-shadow: 0 0 12px rgba(255, 209, 102, 0.12);
+}
+
+.music-toggle-btn.is-wake-prompt {
+  border-color: var(--color-accent-gold);
+  background-color: var(--color-accent-gold-soft);
+  color: var(--color-berry);
+  box-shadow: 0 0 10px rgba(244, 178, 72, 0.25);
+}
+
+[data-theme="midnight"] .music-toggle-btn.is-wake-prompt {
+  border-color: rgba(255, 209, 102, 0.6);
+  background-color: #352643;
+  color: var(--color-accent-gold);
+  box-shadow: 0 0 14px rgba(255, 209, 102, 0.22);
+}
+
+.wake-sparkle {
+  display: inline-block;
+  animation: wakeSparklePulse 2.4s ease-in-out infinite;
+}
+
+@keyframes wakeSparklePulse {
+  0%, 100% { transform: scale(1); opacity: 0.85; }
+  50% { transform: scale(1.25); opacity: 1; filter: drop-shadow(0 0 4px var(--color-accent-gold)); }
+}
+
+.icon-pulse {
+  animation: musicPulse 2s ease-in-out infinite;
+}
+
+@keyframes musicPulse {
+  0%, 100% { transform: scale(1); opacity: 0.9; }
+  50% { transform: scale(1.15); opacity: 1; }
+}
+
+/* Volume popover trigger attached to music button */
+.nav-volume-popover-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  margin-left: -8px;
+}
+
+.nav-vol-pop-btn {
+  height: 38px;
+  width: 28px;
+  background: none;
+  border: 1.5px solid var(--color-border-warm);
+  border-left: none;
+  border-top-right-radius: var(--radius-pill);
+  border-bottom-right-radius: var(--radius-pill);
+  background-color: var(--color-surface);
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 6px 0 2px;
+  box-shadow: var(--shadow-xs);
+  transition: all var(--transition-fast);
+}
+
+.nav-vol-pop-btn:hover,
+.nav-vol-pop-btn.is-open {
+  color: var(--color-berry);
+  border-color: var(--color-berry-border);
+}
+
+[data-theme="midnight"] .nav-vol-pop-btn {
+  background-color: #271f37;
+  border-color: rgba(68, 52, 82, 0.9);
+  color: #d6c3b8;
+}
+
+[data-theme="midnight"] .nav-vol-pop-btn:hover,
+[data-theme="midnight"] .nav-vol-pop-btn.is-open {
+  color: var(--color-accent-gold);
+  border-color: rgba(255, 209, 102, 0.45);
+}
+
+.nav-music-group:has(.nav-vol-pop-btn) .music-toggle-btn {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* Volume Dropdown Slider Box */
+.nav-volume-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 170px;
+  background-color: var(--color-surface);
+  border: 1.5px solid var(--color-border-warm);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  box-shadow: var(--shadow-md);
+  z-index: 120;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  animation: popoverFadeIn 180ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="midnight"] .nav-volume-dropdown {
+  background-color: #271f37;
+  border-color: #4b3861;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+
+@keyframes popoverFadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.nav-vol-pop-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-playful-rounded);
+  font-size: 0.74rem;
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+.nav-vol-pop-title {
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.nav-vol-pop-val {
+  color: var(--color-berry);
+  font-weight: 700;
+}
+
+[data-theme="midnight"] .nav-vol-pop-val {
+  color: var(--color-accent-gold);
+}
+
+.nav-vol-range {
+  width: 100%;
+  accent-color: var(--color-berry);
+  cursor: pointer;
+  height: 6px;
+  border-radius: var(--radius-pill);
+}
+
+[data-theme="midnight"] .nav-vol-range {
+  accent-color: var(--color-accent-gold);
+}
+
+/* ==========================================================================
+   Mobile Toggle Hamburger Button
+   ========================================================================== */
+.mobile-menu-btn {
+  display: none;
+  height: 38px;
+  width: 38px;
+  background-color: var(--color-surface);
+  border: 1.5px solid var(--color-border-warm);
+  border-radius: var(--radius-pill);
+  color: var(--color-text-main);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  box-shadow: var(--shadow-xs);
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.mobile-menu-btn:hover {
+  border-color: var(--color-berry-border);
+  transform: translateY(-1px);
+}
+
+[data-theme="midnight"] .mobile-menu-btn {
+  background-color: #271f37;
+  border-color: rgba(68, 52, 82, 0.9);
+  color: #fff5ed;
+}
+
+[data-theme="midnight"] .mobile-menu-btn:hover {
+  border-color: rgba(255, 209, 102, 0.45);
+  color: var(--color-accent-gold);
+}
+
+.mobile-menu-btn svg {
+  display: block;
+}
+
+/* Mobile Dropdown Panel */
+.nav-mobile-drawer {
+  display: none;
+}
+
+/* ==========================================================================
+   Responsive Adaptations
+   ========================================================================== */
+
+/* Large Laptops / Desktops (1100px - 1280px): Tighten padding slightly */
+@media (max-width: 1240px) {
+  .nav-link {
+    padding: 6px 9px;
+    font-size: 0.85rem;
+  }
+
+  .nav-ctrl-btn {
+    padding: 0 10px;
+    font-size: 0.8rem;
+  }
+}
+
+/* Tablets Landscape & Medium Screens (960px - 1080px): Compact button labels */
+@media (max-width: 1080px) {
+  .nav-inner {
+    gap: var(--space-xs);
+  }
+
+  .nav-link {
+    padding: 5px 8px;
+    font-size: 0.82rem;
+  }
+
+  .nav-desktop-links {
+    gap: 4px;
+  }
+
+  .nav-actions {
+    gap: 6px;
+  }
+
+  .sound-toggle-btn .ctrl-label,
+  .music-toggle-btn .ctrl-label,
+  .theme-toggle-btn .ctrl-label {
+    display: none;
+  }
+
+  .sound-toggle-btn,
+  .music-toggle-btn,
+  .theme-toggle-btn {
+    padding: 0 9px;
+    width: 38px;
+    justify-content: center;
+  }
+}
+
+/* Tablets Portrait & Under (<= 960px): Switch Desktop Links to Mobile Drawer */
+@media (max-width: 960px) {
+  .nav-desktop-wrap {
+    display: none;
+  }
+
+  .mobile-menu-btn {
+    display: inline-flex;
+  }
+
+  .nav-actions {
+    gap: 6px;
+  }
+
+  .music-toggle-btn .ctrl-label {
+    display: none;
+  }
+
+  .music-toggle-btn {
+    padding: 0 9px;
+    width: 38px;
+  }
+
+  .theme-toggle-btn .ctrl-label {
+    display: none;
+  }
+
+  .theme-toggle-btn {
+    padding: 0 9px;
+    width: 38px;
+  }
+
+  .nav-mobile-drawer {
+    display: block;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--transition-normal) ease-out, opacity var(--transition-normal);
+    opacity: 0;
+    border-top: 1px solid transparent;
+    background-color: var(--color-surface-card);
+  }
+
+  .nav-mobile-drawer.is-open {
+    max-height: 380px;
+    opacity: 1;
+    border-top: 1.5px solid var(--color-border-warm);
+  }
+
+  [data-theme="midnight"] .nav-mobile-drawer.is-open {
+    border-top-color: rgba(68, 52, 82, 0.8);
+    background-color: #221a30;
+  }
+
+  .nav-mobile-list {
+    list-style: none;
+    padding: var(--space-md) var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .nav-mobile-link {
+    display: block;
+    padding: 10px 14px;
+    border-radius: var(--radius-md);
+    font-family: var(--font-playful-rounded);
+    font-size: 0.96rem;
+    font-weight: 600;
+    color: var(--color-text-main);
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border-subtle);
+    text-decoration: none;
+    transition: all var(--transition-fast);
+  }
+
+  .nav-mobile-link:hover {
+    color: var(--color-berry);
+    background-color: var(--color-berry-soft);
+    border-color: var(--color-berry-border);
+  }
+
+  [data-theme="midnight"] .nav-mobile-link {
+    color: #fff5ed;
+    background-color: #291f3a;
+    border-color: #4b3861;
+  }
+
+  [data-theme="midnight"] .nav-mobile-link:hover {
+    color: var(--color-accent-gold);
+    background-color: #35274d;
+    border-color: rgba(255, 209, 102, 0.4);
+  }
+}
+
+/* Mobile Screens (<= 480px): Compact Brand & Controls */
+@media (max-width: 480px) {
+  .nav-container {
+    padding-left: 10px;
+    padding-right: 10px;
+    gap: 6px;
+    height: 60px;
+  }
+
+  .nav-brand {
+    flex-shrink: 1;
+    min-width: 0;
+  }
+
+  .nav-brand-sub {
+    display: none;
+  }
+
+  .nav-brand-title {
+    font-size: 0.94rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .nav-avatar-wrap {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+  }
+
+  .nav-actions {
+    gap: 5px;
+    flex-shrink: 0;
+  }
+
+  .nav-ctrl-btn,
+  .mobile-menu-btn {
+    height: 36px;
+    width: 36px;
+    min-width: 36px;
+    padding: 0;
+    flex-shrink: 0;
+  }
+
+  /* On mobile <= 480px, volume is controlled via bottom bedtime dock or device volume */
+  .nav-volume-popover-wrap,
+  .nav-vol-pop-btn {
+    display: none !important;
+  }
+
+  .nav-music-group .music-toggle-btn {
+    border-radius: var(--radius-pill) !important;
+  }
+}
+
+/* Smallest Mobile (<= 360px): Ultra-compact clean fit */
+@media (max-width: 360px) {
+  .nav-container {
+    padding-left: 6px;
+    padding-right: 6px;
+    gap: 4px;
+  }
+
+  .nav-brand-suffix {
+    display: none;
+  }
+
+  .nav-brand-title {
+    font-size: 0.88rem;
+    font-weight: 700;
+  }
+
+  .nav-avatar-wrap {
+    width: 30px;
+    height: 30px;
+  }
+
+  .nav-actions {
+    gap: 4px;
+  }
+
+  .nav-ctrl-btn,
+  .mobile-menu-btn {
+    height: 32px;
+    width: 32px;
+    min-width: 32px;
+    font-size: 0.82rem;
+  }
+}
