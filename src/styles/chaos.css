@@ -1,0 +1,52 @@
+/* chaos.css – visual chaos styles applied when .chaos-mode class is present on html */
+
+/* Apply a hue rotation filter to the entire page for a color shift */
+html.chaos-mode {
+  filter: hue-rotate(var(--chaos-hue, 0deg));
+}
+
+/* Random rotate outer cards (outer decorative containers only, NEVER images directly) */
+html.chaos-mode .dream-card,
+html.chaos-mode .project-showcase-card,
+html.chaos-mode .story-scene-row,
+html.chaos-mode .guestbook-card,
+html.chaos-mode .entry-card,
+html.chaos-mode .game-intro-card,
+html.chaos-mode .atlas-discovery-card {
+  transform: rotate(var(--chaos-rotate, 0deg));
+  transition: transform var(--transition-fast);
+}
+
+/* For cards with 3D hover tilt, combine chaos rotation with perspective tilt */
+html.chaos-mode [data-tilt],
+html.chaos-mode .storybook-tilt-card {
+  transform: perspective(1000px) rotate(var(--chaos-rotate, 0deg)) rotateX(var(--tilt-rx, 0deg)) rotateY(var(--tilt-ry, 0deg)) translateY(var(--tilt-lift, 0px)) translateZ(var(--tilt-tz, 0px)) scale(var(--tilt-scale, 1));
+}
+
+/* Ensure images inside cards never receive rotation or transform */
+html.chaos-mode img {
+  transform: none !important;
+}
+
+/* Slightly jitter text */
+html.chaos-mode .hero-heading,
+html.chaos-mode .hero-lead,
+html.chaos-mode .project-title,
+html.chaos-mode .footer-brand-name {
+  animation: jitter 0.5s infinite alternate;
+}
+
+@keyframes jitter {
+  from { transform: translateX(0px); }
+  to { transform: translateX(2px); }
+}
+
+/* Ensure reduced-motion respects user preferences */
+@media (prefers-reduced-motion: reduce) {
+  html.chaos-mode * {
+    animation: none !important;
+    transition: none !important;
+    filter: none !important;
+  }
+}
+

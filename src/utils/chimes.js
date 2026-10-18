@@ -1,19 +1,30 @@
-// ==========================================================================
+// ===========================================================================
 // Pip's Subtle Web Audio Chimes
 // Pure Web Audio: User-enabled only, no autoplay, instant resource disposal
 // Reuses a single shared AudioContext with auto-suspend on idle
-// ==========================================================================
+// ===========================================================================
 
-let soundEnabled = false;
+import { isMuted, setMuted, subscribeToMute } from './mute';
 
-// Initialize from localStorage if available
+// Initialize soundEnabled from global mute state
+let soundEnabled = !isMuted();
+// Sync with global mute changes
+const unsubscribeMute = subscribeToMute((muted) => {
+  soundEnabled = !muted;
+});
+
+// Initialize from localStorage if available (overridden by global mute)
 if (typeof window !== 'undefined') {
   try {
-    soundEnabled = localStorage.getItem('pip_sound_enabled') === 'true';
-  } catch {
-    soundEnabled = false;
-  }
+    // legacy flag ignored, rely on global mute
+    const legacy = localStorage.getItem('pip_sound_enabled') === 'true';
+    // If global mute not set, keep compatibility
+    if (localStorage.getItem('pip_global_mute') === null) {
+      soundEnabled = legacy;
+    }
+  } catch {}
 }
+
 
 export function isSoundEnabled() {
   return soundEnabled;

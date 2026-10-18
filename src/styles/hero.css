@@ -288,6 +288,18 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  perspective: 1200px;
+  transform-style: preserve-3d;
+  animation: heroStageFloat 6.2s ease-in-out infinite;
+}
+
+@keyframes heroStageFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
 }
 
 .pip-storybook-portal {
@@ -301,7 +313,8 @@
   padding: 10px 10px 14px;
   box-shadow: var(--shadow-lg), inset 0 0 0 1.5px rgba(244, 178, 72, 0.32), 0 14px 40px rgba(163, 64, 99, 0.12);
   overflow: hidden;
-  transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
+  transition: transform 0.28s cubic-bezier(0.18, 0.9, 0.3, 1), box-shadow 0.28s ease, border-color var(--transition-normal);
+  transform-style: preserve-3d;
 }
 
 [data-theme="midnight"] .pip-storybook-portal {
@@ -345,12 +358,23 @@
   transition: transform var(--transition-normal);
 }
 
+.pip-character-float-wrap {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-style: preserve-3d;
+  transform: translateZ(16px);
+  transition: transform var(--transition-normal);
+}
+
 /* Floating Dream Badges */
 .floating-dream-badge {
   position: absolute;
   bottom: 4%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateZ(28px);
   z-index: 4;
   background-color: var(--color-surface);
   border: 1.5px solid var(--color-border-warm);
@@ -361,7 +385,17 @@
   align-items: center;
   gap: 8px;
   white-space: nowrap;
+  animation: dreamBadgeFloat 5.0s ease-in-out infinite 0.6s;
   transition: border-color var(--transition-normal), box-shadow var(--transition-normal), background-color var(--transition-normal);
+}
+
+@keyframes dreamBadgeFloat {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0px) translateZ(28px);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-4px) translateZ(28px);
+  }
 }
 
 [data-theme="midnight"] .floating-dream-badge {
@@ -403,9 +437,9 @@
 /* Thought Bubble inside Pip's Storybook Portal */
 .pip-thought-bubble {
   position: absolute;
-  top: 36px;
+  top: 70px;
   left: 50%;
-  transform: translateX(-50%) translateY(4px);
+  transform: translateX(-50%);
   z-index: 5;
   display: inline-flex;
   align-items: center;
@@ -573,6 +607,18 @@
   z-index: 1;
   background: radial-gradient(circle, rgba(244, 178, 72, 0.18) 0%, transparent 68%);
   transition: background var(--transition-slow), opacity var(--transition-slow);
+  animation: haloGlowBreath 5.4s ease-in-out infinite alternate;
+}
+
+@keyframes haloGlowBreath {
+  0% {
+    transform: translate(-50%, -50%) scale(0.96);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.06);
+    opacity: 1;
+  }
 }
 
 [data-theme="midnight"] .pip-celestial-halo {

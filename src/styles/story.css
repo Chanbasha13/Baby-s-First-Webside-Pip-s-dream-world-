@@ -335,14 +335,10 @@
   height: 100%;
   max-width: 100%;
   max-height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
   display: block;
-  border-radius: calc(var(--radius-xl) - 1.5px);
-  transition: transform var(--transition-normal);
-}
-
-.story-scene-row:hover .scene-artwork-img {
-  transform: scale(1.025);
+  transform: none !important;
 }
 
 /* Scene 01: Deliberate Portrait Presentation (Matches 682x1024 pip_portrait) */
@@ -350,6 +346,16 @@
   max-width: 330px;
   aspect-ratio: 682 / 1024;
   padding: 0;
+  animation: storyPortraitFloat 6.0s ease-in-out infinite 0.2s;
+}
+
+@keyframes storyPortraitFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
 }
 
 /* Scene 02: Lullaby Workbench (Matches 1024x924 pip_lullaby_box) */
@@ -357,6 +363,16 @@
   max-width: 380px;
   aspect-ratio: 1024 / 924;
   padding: 0;
+  animation: storyWorkbenchFloat 5.5s ease-in-out infinite 0.9s;
+}
+
+@keyframes storyWorkbenchFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
 }
 
 /* Scene 03: Nightlight Lantern (Matches 1024x914 pip_dream_lantern) */
@@ -364,6 +380,16 @@
   max-width: 380px;
   aspect-ratio: 1024 / 914;
   padding: 0;
+  animation: storyLanternFloat 6.4s ease-in-out infinite 1.5s;
+}
+
+@keyframes storyLanternFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
 }
 
 .scene-frame-lantern::after {
@@ -384,6 +410,16 @@
   max-width: 400px;
   aspect-ratio: 360 / 260;
   padding: 0;
+  animation: storyDeliveryFloat 7.0s ease-in-out infinite 0.5s;
+}
+
+@keyframes storyDeliveryFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
 }
 
 @media (max-width: 900px) {

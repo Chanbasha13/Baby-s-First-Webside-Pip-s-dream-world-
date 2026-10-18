@@ -1,4 +1,5 @@
 import React from 'react';
+import HitCounter from './HitCounter';
 
 export default function Footer() {
   return (
@@ -74,8 +75,9 @@ export default function Footer() {
           <span className="footer-resting-motif">✦ Quiet Dawn: Pip is dozing on Cloud #07 · All dreams safely delivered ✦</span>
           <span>React 18 + Vite · haX.baby</span>
         </div>
+        {/* Hit Counter */}
+        <HitCounter />
       </div>
     </footer>
   );
 }
-

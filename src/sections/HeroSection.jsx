@@ -65,7 +65,7 @@ export default function HeroSection() {
               <div className={`pip-celestial-halo state-${personalityState}`} aria-hidden="true" />
 
               {/* Arched Storybook Portal Frame */}
-              <div className="pip-storybook-portal">
+              <div className="pip-storybook-portal" data-tilt="primary">
                 {/* Pip's Living Thought/Whisper Bubble — Positioned inside card arch above Pip */}
                 <div
                   className={`pip-thought-bubble state-${personalityState} ${messageVisible ? 'is-visible' : ''}`}

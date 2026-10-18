@@ -76,146 +76,311 @@
   gap: var(--space-3xl);
 }
 
-/* Base Project Showcase Card */
+/* Base Project Showcase Card — Warm Storybook Parchment Stage */
 .project-showcase-card {
-  background: var(--color-surface);
+  background: linear-gradient(155deg, #fffcf8 0%, #faf3eb 60%, #f6ecdf 100%);
   border: 1.5px solid var(--color-border-warm);
-  border-radius: var(--radius-xl);
-  overflow: hidden;
-  box-shadow: var(--shadow-sm);
-  transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 320ms cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 250ms ease;
+  border-radius: var(--radius-2xl, 32px);
+  overflow: visible;
+  box-shadow: 0 16px 44px -12px rgba(61, 39, 29, 0.10),
+              0 4px 16px -2px rgba(163, 64, 99, 0.05),
+              inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  transition: box-shadow var(--transition-normal), border-color var(--transition-normal);
+  position: relative;
+}
+
+[data-theme="midnight"] .project-showcase-card {
+  background: linear-gradient(155deg, #1b1226 0%, #221830 60%, #171020 100%);
+  border-color: #3f2f54;
+  box-shadow: 0 20px 48px -10px rgba(0, 0, 0, 0.65),
+              0 0 0 1px rgba(255, 209, 102, 0.16) inset;
 }
 
 .project-showcase-card:hover {
   border-color: var(--color-berry-border);
-  box-shadow: var(--shadow-md), 0 12px 32px rgba(163, 64, 99, 0.08);
+  box-shadow: 0 22px 52px -12px rgba(61, 39, 29, 0.14),
+              0 6px 20px -2px rgba(163, 64, 99, 0.08),
+              inset 0 1px 0 rgba(255, 255, 255, 0.95);
 }
 
 [data-theme="midnight"] .project-showcase-card:hover {
   border-color: var(--color-accent-gold-border);
-  box-shadow: var(--shadow-lg), 0 12px 36px rgba(255, 209, 102, 0.12);
+  box-shadow: 0 24px 56px -10px rgba(0, 0, 0, 0.75),
+              0 0 0 1px rgba(255, 209, 102, 0.28) inset;
 }
 
 .project-showcase-card:focus-within {
   border-color: var(--color-berry);
 }
 
-/* Storybook Differentiated Showcase Frames (Acoustic Bench, Lantern Alcove, Drafting Desk) */
+/* Storybook Atmospheric Background Accents */
 .project-card-acoustic {
   position: relative;
-  background: radial-gradient(circle at 10% 50%, rgba(244, 178, 72, 0.05) 0%, var(--color-surface) 65%);
-  box-shadow: 0 0 0 1px rgba(244, 178, 72, 0.18) inset, var(--shadow-sm);
+  background: radial-gradient(ellipse at 25% 45%, rgba(244, 178, 72, 0.09) 0%, transparent 65%),
+              linear-gradient(155deg, #fffcf8 0%, #faf3eb 60%, #f6ecdf 100%);
 }
 
 [data-theme="midnight"] .project-card-acoustic {
-  background: radial-gradient(circle at 10% 50%, rgba(255, 209, 102, 0.08) 0%, var(--color-surface) 70%);
-  box-shadow: 0 0 0 1px rgba(255, 209, 102, 0.22) inset, var(--shadow-sm);
+  background: radial-gradient(ellipse at 25% 45%, rgba(255, 209, 102, 0.12) 0%, transparent 70%),
+              linear-gradient(155deg, #1b1226 0%, #221830 60%, #171020 100%);
 }
 
 .project-card-lantern {
   position: relative;
-  background: radial-gradient(circle at 20% 40%, rgba(235, 140, 75, 0.06) 0%, var(--color-surface) 65%);
-  box-shadow: 0 0 0 1px rgba(235, 140, 75, 0.2) inset, var(--shadow-sm);
+  background: radial-gradient(ellipse at 25% 45%, rgba(235, 140, 75, 0.10) 0%, transparent 65%),
+              linear-gradient(155deg, #fffcf8 0%, #faf3eb 60%, #f6ecdf 100%);
 }
 
 [data-theme="midnight"] .project-card-lantern {
-  background: radial-gradient(circle at 20% 40%, rgba(255, 185, 90, 0.09) 0%, var(--color-surface) 70%);
-  box-shadow: 0 0 0 1px rgba(255, 185, 90, 0.25) inset, var(--shadow-sm);
+  background: radial-gradient(ellipse at 25% 45%, rgba(255, 185, 90, 0.14) 0%, transparent 70%),
+              linear-gradient(155deg, #1b1226 0%, #221830 60%, #171020 100%);
 }
 
 .project-card-drafting {
   position: relative;
-  background: radial-gradient(circle at 15% 45%, rgba(138, 182, 214, 0.06) 0%, var(--color-surface) 65%);
-  box-shadow: 0 0 0 1px rgba(138, 182, 214, 0.22) inset, var(--shadow-sm);
+  background: radial-gradient(ellipse at 25% 45%, rgba(138, 182, 214, 0.10) 0%, transparent 65%),
+              linear-gradient(155deg, #fffcf8 0%, #faf3eb 60%, #f6ecdf 100%);
 }
 
 [data-theme="midnight"] .project-card-drafting {
-  background: radial-gradient(circle at 15% 45%, rgba(156, 208, 240, 0.08) 0%, var(--color-surface) 70%);
-  box-shadow: 0 0 0 1px rgba(156, 208, 240, 0.25) inset, var(--shadow-sm);
+  background: radial-gradient(ellipse at 25% 45%, rgba(156, 208, 240, 0.12) 0%, transparent 70%),
+              linear-gradient(155deg, #1b1226 0%, #221830 60%, #171020 100%);
 }
 
+/* Grid Layout — Gives Artwork Visual Prominence */
 .project-showcase-grid {
   display: grid;
-  grid-template-columns: 1fr 1.15fr;
+  grid-template-columns: 1.15fr 1fr;
   align-items: center;
+  position: relative;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 960px) {
   .project-showcase-grid {
     grid-template-columns: 1fr;
   }
 }
 
-/* ==========================================================================
-   Project 01: Lullaby Lab Styles & Audio Visualizer
-   ========================================================================== */
-
-.lullaby-media-frame {
+/* Media Column Containers */
+.lullaby-media-frame,
+.nightlight-media-frame,
+.delivery-map-media-frame {
   position: relative;
-  background: linear-gradient(135deg, #fdfbf7 0%, #f6ece0 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: clamp(20px, 3.2vw, 32px);
-  height: 100%;
-  min-height: 380px;
-  border-right: 1.5px solid var(--color-border-subtle);
-  transition: background var(--transition-normal);
+  padding: clamp(24px, 3.5vw, 42px);
+  min-height: 420px;
+  overflow: visible;
 }
 
-[data-theme="midnight"] .lullaby-media-frame {
-  background: radial-gradient(circle at 50% 40%, rgba(255, 209, 102, 0.08) 0%, #1f162c 75%);
-  border-right-color: #3b2c4c;
+/* Gentle Storybook Floating Motion */
+.artwork-float-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1200px;
 }
 
-@media (max-width: 900px) {
-  .lullaby-media-frame {
-    border-right: none;
-    border-bottom: 1.5px solid var(--color-border-subtle);
+.artwork-float-lullaby {
+  animation: floatMusicBox 5.8s ease-in-out infinite 0.2s;
+}
+
+.artwork-float-nightlight {
+  animation: floatLantern 6.6s ease-in-out infinite 1.2s;
+}
+
+.artwork-float-routes {
+  animation: floatRoutes 7.2s ease-in-out infinite 0.7s;
+}
+
+@keyframes floatMusicBox {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-9px) rotate(0.4deg);
   }
 }
 
-/* ==========================================================================
-   Project Artwork Frame Architecture
-   Tailored aspect ratios matching intrinsic product artwork dimensions:
-   - Lullaby Lab: 1024x924 (aspect-ratio: 1024 / 924)
-   - Nightlight Collection: 1024x914 (aspect-ratio: 1024 / 914)
-   - Delivery Routes: 340x220 (aspect-ratio: 340 / 220)
-   Guarantees 0px empty vertical letterboxing with zero distortion or stretch
-   ========================================================================== */
+@keyframes floatLantern {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-11px) rotate(-0.5deg);
+  }
+}
 
-.project-artwork-frame {
+@keyframes floatRoutes {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+/* 3D Interactive Artwork Stage */
+.project-artwork-stage {
   position: relative;
   width: 100%;
-  max-width: 330px;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  border: 1.5px solid var(--color-border-warm);
-  background-color: #ebd5c5; /* Matches exact natural border tone of Pip artwork */
-  box-shadow: 0 8px 24px rgba(61, 39, 29, 0.10), inset 0 0 0 1px rgba(255, 255, 255, 0.5);
-  transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
+  max-width: 440px;
+  border-radius: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
+  transform-style: preserve-3d;
+  cursor: grab;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s ease,
+              border-color 0.35s ease;
 }
 
-[data-theme="midnight"] .project-artwork-frame {
-  background-color: #1f162c;
+.project-artwork-stage:active {
+  cursor: grabbing;
+}
+
+.project-artwork-lullaby-stage {
+  background: radial-gradient(ellipse at 50% 50%, #fffdfa 0%, #f6ece0 65%, #ead6c3 100%);
+  border: 1.5px solid rgba(223, 192, 164, 0.65);
+  box-shadow: 0 16px 40px -10px rgba(61, 39, 29, 0.14),
+              0 0 0 1px rgba(255, 255, 255, 0.8) inset,
+              0 0 32px rgba(244, 178, 72, 0.15);
+}
+
+[data-theme="midnight"] .project-artwork-lullaby-stage {
+  background: radial-gradient(ellipse at 50% 50%, #2b1e38 0%, #1f162c 65%, #160f20 100%);
   border-color: #4b3861;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 209, 102, 0.12);
+  box-shadow: 0 20px 48px -10px rgba(0, 0, 0, 0.7),
+              0 0 0 1px rgba(255, 209, 102, 0.25) inset,
+              0 0 36px rgba(255, 209, 102, 0.18);
 }
 
-.project-showcase-card:hover .project-artwork-frame {
-  border-color: var(--color-berry-border);
-  box-shadow: 0 12px 32px rgba(61, 39, 29, 0.14), inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+.project-artwork-nightlight-stage {
+  background: radial-gradient(ellipse at 50% 50%, #fffdfa 0%, #f7ede0 65%, #ead5c0 100%);
+  border: 1.5px solid rgba(235, 140, 75, 0.45);
+  box-shadow: 0 16px 40px -10px rgba(61, 39, 29, 0.14),
+              0 0 0 1px rgba(255, 255, 255, 0.8) inset,
+              0 0 32px rgba(235, 140, 75, 0.18);
 }
 
-[data-theme="midnight"] .project-showcase-card:hover .project-artwork-frame {
-  border-color: var(--color-accent-gold);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 24px rgba(255, 209, 102, 0.2);
+[data-theme="midnight"] .project-artwork-nightlight-stage {
+  background: radial-gradient(ellipse at 50% 50%, #2f2038 0%, #20152b 65%, #160d21 100%);
+  border-color: #553860;
+  box-shadow: 0 20px 48px -10px rgba(0, 0, 0, 0.7),
+              0 0 0 1px rgba(255, 185, 90, 0.25) inset,
+              0 0 36px rgba(255, 185, 90, 0.2);
+}
+
+.project-artwork-routes-stage {
+  background: radial-gradient(ellipse at 50% 50%, #fcfbfa 0%, #eef5fa 65%, #deebf5 100%);
+  border: 1.5px solid rgba(138, 182, 214, 0.5);
+  box-shadow: 0 16px 40px -10px rgba(61, 39, 29, 0.12),
+              0 0 0 1px rgba(255, 255, 255, 0.8) inset,
+              0 0 30px rgba(138, 182, 214, 0.15);
+}
+
+[data-theme="midnight"] .project-artwork-routes-stage {
+  background: radial-gradient(ellipse at 50% 50%, #1c2336 0%, #161b2a 65%, #101420 100%);
+  border-color: #3b4c6b;
+  box-shadow: 0 20px 48px -10px rgba(0, 0, 0, 0.7),
+              0 0 0 1px rgba(156, 208, 240, 0.22) inset,
+              0 0 36px rgba(156, 208, 240, 0.16);
+}
+
+/* Atmospheric Starlight Halos */
+.artwork-atmosphere-halo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: var(--radius-pill);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.lullaby-halo-glow {
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(244, 178, 72, 0.28) 0%, rgba(244, 178, 72, 0.08) 50%, transparent 72%);
+  filter: blur(10px);
+  animation: haloPulseGlow 4.8s ease-in-out infinite alternate;
+}
+
+[data-theme="midnight"] .lullaby-halo-glow {
+  background: radial-gradient(circle, rgba(255, 209, 102, 0.35) 0%, rgba(199, 90, 132, 0.18) 50%, transparent 75%);
+}
+
+.nightlight-halo-glow {
+  width: 260px;
+  height: 260px;
+  border-radius: var(--radius-pill);
+  filter: blur(10px);
+  animation: haloPulseGlow 4.4s ease-in-out infinite alternate;
+}
+
+.mode-dim .nightlight-halo-glow {
+  background: radial-gradient(circle, rgba(244, 178, 72, 0.35) 0%, rgba(235, 140, 75, 0.15) 50%, transparent 72%);
+}
+
+.mode-bright .nightlight-halo-glow {
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(255, 225, 140, 0.65) 0%, rgba(244, 178, 72, 0.38) 45%, transparent 75%);
+  filter: blur(14px);
+}
+
+@keyframes haloPulseGlow {
+  0% {
+    transform: translate(-50%, -50%) scale(0.94);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.08);
+    opacity: 1;
+  }
+}
+
+/* Floating Stardust & Music Notes Layer */
+.artwork-stardust-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.star-chime-glyph {
+  position: absolute;
+  font-size: 1.15rem;
+  color: var(--color-accent-gold);
+  opacity: 0.75;
+  filter: drop-shadow(0 0 6px rgba(244, 178, 72, 0.6));
+  animation: noteFloat 4.2s ease-in-out infinite alternate;
+}
+
+.sc-1 { top: 12%; left: 14%; animation-delay: 0.2s; }
+.sc-2 { top: 16%; right: 16%; animation-delay: 1.1s; }
+.sc-3 { bottom: 18%; left: 10%; animation-delay: 0.7s; }
+
+@keyframes noteFloat {
+  0% { transform: translateY(0px) rotate(-6deg); opacity: 0.55; }
+  100% { transform: translateY(-9px) rotate(8deg); opacity: 0.95; }
+}
+
+/* Portal Frame & Image Container */
+.artwork-portal-frame {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  overflow: visible;
 }
 
 .project-artwork-lullaby {
@@ -228,8 +393,7 @@
 
 .project-artwork-routes {
   aspect-ratio: 340 / 220;
-  max-width: 340px;
-  background-color: var(--color-surface);
+  max-width: 380px;
 }
 
 .project-artwork-img {
@@ -238,15 +402,24 @@
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
+  object-position: center;
   display: block;
-  border-radius: calc(var(--radius-lg) - 1.5px);
-  transition: transform var(--transition-normal);
+  transform: translateZ(24px);
+  filter: drop-shadow(0 14px 28px rgba(61, 39, 29, 0.16));
+  transition: filter var(--transition-normal);
 }
 
-.lullaby-img {
+[data-theme="midnight"] .project-artwork-img {
+  filter: drop-shadow(0 16px 36px rgba(0, 0, 0, 0.65)) drop-shadow(0 0 20px rgba(255, 209, 102, 0.18));
+}
+
+.lullaby-img,
+.nightlight-img {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  object-position: center;
+  display: block;
 }
 
 /* Animated Sound Waveform Bars */
@@ -381,73 +554,7 @@
   background-color: #2b1717;
 }
 
-/* ==========================================================================
-   Project 02: Nightlight Collection Styles & Light Toggle
-   ========================================================================== */
-
-.nightlight-media-frame {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: clamp(20px, 3.2vw, 32px);
-  height: 100%;
-  min-height: 380px;
-  border-right: 1.5px solid var(--color-border-subtle);
-  transition: background var(--transition-slow);
-}
-
-@media (max-width: 900px) {
-  .nightlight-media-frame {
-    border-right: none;
-    border-bottom: 1.5px solid var(--color-border-subtle);
-  }
-}
-
-.nightlight-media-frame.mode-dim {
-  background: radial-gradient(circle at 50% 50%, rgba(244, 178, 72, 0.15) 0%, var(--color-bg) 75%);
-}
-
-.nightlight-media-frame.mode-bright {
-  background: radial-gradient(circle at 50% 50%, rgba(255, 218, 120, 0.45) 0%, rgba(244, 178, 72, 0.25) 50%, var(--color-bg) 85%);
-}
-
-.nightlight-halo-glow {
-  position: absolute;
-  width: 220px;
-  height: 220px;
-  border-radius: var(--radius-pill);
-  pointer-events: none;
-  transition: box-shadow var(--transition-slow), opacity var(--transition-slow);
-}
-
-.mode-dim .nightlight-halo-glow {
-  box-shadow: 0 0 45px rgba(244, 178, 72, 0.35);
-}
-
-.mode-bright .nightlight-halo-glow {
-  box-shadow: 0 0 95px rgba(255, 209, 102, 0.75), 0 0 40px rgba(244, 178, 72, 0.5);
-}
-
-.nightlight-img {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  transition: filter var(--transition-slow);
-}
-
-.mode-bright .project-artwork-nightlight {
-  border-color: var(--color-accent-gold);
-  box-shadow: 0 8px 32px rgba(255, 209, 102, 0.6), 0 0 20px rgba(244, 178, 72, 0.35);
-}
-
-[data-theme="midnight"] .mode-bright .project-artwork-nightlight {
-  border-color: var(--color-accent-gold);
-  box-shadow: 0 12px 36px rgba(255, 209, 102, 0.5), 0 0 28px rgba(255, 209, 102, 0.3);
-}
+/* Project 02: Light / Dim Toggle Switch Component */
 
 /* Light / Dim Toggle Switch Component */
 .light-switch-wrap {
@@ -502,29 +609,7 @@
   box-shadow: 0 4px 16px rgba(244, 178, 72, 0.4);
 }
 
-/* ==========================================================================
-   Project 03: Dream Delivery Routes & Interactive Map
-   ========================================================================== */
-
-.delivery-map-media-frame {
-  position: relative;
-  padding: clamp(20px, 3.2vw, 32px);
-  background: var(--color-bg);
-  height: 100%;
-  min-height: 380px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border-right: 1.5px solid var(--color-border-subtle);
-}
-
-@media (max-width: 900px) {
-  .delivery-map-media-frame {
-    border-right: none;
-    border-bottom: 1.5px solid var(--color-border-subtle);
-  }
-}
+/* Project 03: Interactive Route Map Component */
 
 .interactive-route-svg {
   width: 100%;
@@ -847,6 +932,12 @@
 /* Accessibility: Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   .project-showcase-card,
+  .artwork-float-wrapper,
+  .project-artwork-stage,
+  .artwork-atmosphere-halo,
+  .lullaby-halo-glow,
+  .nightlight-halo-glow,
+  .star-chime-glyph,
   .route-trajectory-path,
   .waypoint-pulse-active,
   .route-dispatch-card,

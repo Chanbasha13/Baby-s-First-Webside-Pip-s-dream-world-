@@ -34,6 +34,8 @@ export function initStorybookTilt() {
     card.style.setProperty('--tilt-rx', '0deg');
     card.style.setProperty('--tilt-ry', '0deg');
     card.style.setProperty('--tilt-lift', '0px');
+    card.style.setProperty('--tilt-tz', '0px');
+    card.style.setProperty('--tilt-scale', '1');
     card.style.setProperty('--glare-opacity', '0');
   };
 
@@ -60,25 +62,27 @@ export function initStorybookTilt() {
     const percentX = Math.max(0, Math.min(100, (relX / width) * 100)).toFixed(1);
     const percentY = Math.max(0, Math.min(100, (relY / height) * 100)).toFixed(1);
 
-    // Tasteful restrained range: 1.0° for primary, 0.7° for secondary
-    // Lift is strictly 0px so cards remain stationary and never jump or fight cursor hit areas
-    const maxRot = isSecondary ? 0.7 : 1.0;
-    const lift = '0px';
+    // Tasteful, polished 3D range: 5.8° for artwork wrappers, 3.8° for primary cards, 2.4° for secondary
+    const tiltType = activeCard.getAttribute('data-tilt');
+    const isArtwork = tiltType === 'artwork' || activeCard.classList.contains('tilt-artwork');
+    const isSecondary = tiltType === 'secondary' || activeCard.classList.contains('tilt-secondary');
+    const maxRot = isArtwork ? 5.8 : (isSecondary ? 2.4 : 3.8);
+    const lift = isArtwork ? '-6px' : (isSecondary ? '-2px' : '-4px');
+    const tz = isArtwork ? '18px' : (isSecondary ? '6px' : '12px');
+    const scale = isArtwork ? '1.025' : (isSecondary ? '1.01' : '1.015');
     const rotX = (-normY * maxRot).toFixed(2);
     const rotY = (normX * maxRot).toFixed(2);
 
     activeCard.style.setProperty('--tilt-rx', `${rotX}deg`);
     activeCard.style.setProperty('--tilt-ry', `${rotY}deg`);
     activeCard.style.setProperty('--tilt-lift', lift);
+    activeCard.style.setProperty('--tilt-tz', tz);
+    activeCard.style.setProperty('--tilt-scale', scale);
     activeCard.style.setProperty('--glare-x', `${percentX}%`);
     activeCard.style.setProperty('--glare-y', `${percentY}%`);
     activeCard.style.setProperty('--glare-opacity', '1');
 
     rafId = null;
-  };
-
-  const isInteractiveTarget = (target) => {
-    return !!target?.closest('button, a, input, textarea, select, .secret-clue-btn, .map-waypoint-btn, [role="button"], [tabindex="0"]');
   };
 
   const onPointerOver = (e) => {
@@ -92,15 +96,6 @@ export function initStorybookTilt() {
     activeCard = card;
     activeRect = card.getBoundingClientRect();
     isSecondary = card.getAttribute('data-tilt') === 'secondary' || card.classList.contains('tilt-secondary');
-
-    if (isInteractiveTarget(e.target)) {
-      resetCard(activeCard);
-      if (rafId) {
-        cancelAnimationFrame(rafId);
-        rafId = null;
-      }
-      return;
-    }
 
     pendingX = e.clientX;
     pendingY = e.clientY;
@@ -121,15 +116,6 @@ export function initStorybookTilt() {
       } else {
         return;
       }
-    }
-
-    if (isInteractiveTarget(e.target)) {
-      resetCard(activeCard);
-      if (rafId) {
-        cancelAnimationFrame(rafId);
-        rafId = null;
-      }
-      return;
     }
 
     pendingX = e.clientX;

@@ -12,6 +12,7 @@
 @import './atlas.css';
 @import './quest.css';
 @import './persistent-celestial.css';
+@import './chaos.css';
 
 /* ==========================================================================
    Global Reset & Base Setup
@@ -94,6 +95,18 @@ img {
   max-width: 100%;
   height: auto;
   display: block;
+}
+
+/* Card & artwork images: strictly preserve alignment and geometric integrity */
+.project-artwork-frame img,
+.scene-artwork-frame img,
+.asset-media-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  transform: none !important;
 }
 
 /* ==========================================================================
@@ -437,12 +450,14 @@ img {
     --tilt-rx: 0deg;
     --tilt-ry: 0deg;
     --tilt-lift: 0px;
+    --tilt-tz: 0px;
+    --tilt-scale: 1;
     --glare-x: 50%;
     --glare-y: 50%;
     --glare-opacity: 0;
-    transform: perspective(1000px) rotateX(var(--tilt-rx)) rotateY(var(--tilt-ry));
+    transform: perspective(1000px) rotateX(var(--tilt-rx)) rotateY(var(--tilt-ry)) translateY(var(--tilt-lift)) translateZ(var(--tilt-tz)) scale(var(--tilt-scale));
     transform-style: preserve-3d;
-    transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease;
+    transition: transform 0.28s cubic-bezier(0.18, 0.9, 0.3, 1), box-shadow 0.28s ease;
     position: relative;
     will-change: transform;
     backface-visibility: hidden;
@@ -455,31 +470,76 @@ img {
     inset: 0;
     border-radius: inherit;
     pointer-events: none;
-    background: radial-gradient(circle at var(--glare-x, 50%) var(--glare-y, 50%), rgba(255, 255, 255, 0.16) 0%, transparent 62%);
+    background: radial-gradient(circle at var(--glare-x, 50%) var(--glare-y, 50%), rgba(255, 255, 255, 0.20) 0%, transparent 62%);
     opacity: var(--glare-opacity, 0);
-    transition: opacity 0.24s ease;
+    transition: opacity 0.26s ease;
     z-index: 2;
   }
 
   [data-theme="midnight"] .storybook-tilt-card::after,
   [data-theme="midnight"] [data-tilt]::after {
-    background: radial-gradient(circle at var(--glare-x, 50%) var(--glare-y, 50%), rgba(255, 209, 102, 0.12) 0%, transparent 62%);
+    background: radial-gradient(circle at var(--glare-x, 50%) var(--glare-y, 50%), rgba(255, 209, 102, 0.16) 0%, transparent 62%);
+  }
+
+  /* Layered child depth inside tilted cards */
+  [data-tilt] .project-artwork-frame,
+  [data-tilt] .scene-artwork-frame,
+  [data-tilt] .atlas-map-frame {
+    transform: translateZ(14px);
+    transition: transform var(--transition-normal);
+  }
+
+  /* Specific 3D artwork depth layers */
+  [data-tilt="artwork"] {
+    transform-style: preserve-3d;
+  }
+
+  [data-tilt="artwork"] .artwork-atmosphere-halo {
+    transform: translateZ(8px);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  [data-tilt="artwork"] .artwork-stardust-layer {
+    transform: translateZ(16px);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  [data-tilt="artwork"] .artwork-portal-frame {
+    transform: translateZ(24px);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  [data-tilt="artwork"] .secret-clue-lantern {
+    transform: translateZ(36px);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  [data-tilt="artwork"]:hover {
+    box-shadow: 0 28px 60px -12px rgba(61, 39, 29, 0.22),
+                0 0 0 1.5px rgba(244, 178, 72, 0.4) inset,
+                0 0 40px rgba(244, 178, 72, 0.18);
+  }
+
+  [data-theme="midnight"] [data-tilt="artwork"]:hover {
+    box-shadow: 0 32px 68px -12px rgba(0, 0, 0, 0.8),
+                0 0 0 1.5px rgba(255, 209, 102, 0.45) inset,
+                0 0 48px rgba(255, 209, 102, 0.28);
   }
 
   [data-tilt="primary"]:hover {
-    box-shadow: 0 20px 42px -10px rgba(61, 39, 29, 0.13), 0 6px 16px -4px rgba(163, 64, 99, 0.08), 0 0 0 1px rgba(244, 178, 72, 0.28) inset;
+    box-shadow: 0 24px 50px -10px rgba(61, 39, 29, 0.16), 0 8px 20px -4px rgba(163, 64, 99, 0.10), 0 0 0 1px rgba(244, 178, 72, 0.35) inset;
   }
 
   [data-theme="midnight"] [data-tilt="primary"]:hover {
-    box-shadow: 0 22px 48px -10px rgba(0, 0, 0, 0.65), 0 8px 20px -4px rgba(199, 90, 132, 0.18), 0 0 0 1px rgba(255, 209, 102, 0.24) inset;
+    box-shadow: 0 28px 56px -10px rgba(0, 0, 0, 0.7), 0 10px 24px -4px rgba(199, 90, 132, 0.22), 0 0 0 1px rgba(255, 209, 102, 0.3) inset;
   }
 
   [data-tilt="secondary"]:hover {
-    box-shadow: 0 10px 24px -6px rgba(61, 39, 29, 0.09), 0 3px 8px -2px rgba(163, 64, 99, 0.06), 0 0 0 1px rgba(244, 178, 72, 0.18) inset;
+    box-shadow: 0 14px 30px -6px rgba(61, 39, 29, 0.11), 0 4px 10px -2px rgba(163, 64, 99, 0.08), 0 0 0 1px rgba(244, 178, 72, 0.24) inset;
   }
 
   [data-theme="midnight"] [data-tilt="secondary"]:hover {
-    box-shadow: 0 12px 30px -6px rgba(0, 0, 0, 0.48), 0 4px 12px -2px rgba(199, 90, 132, 0.12), 0 0 0 1px rgba(255, 209, 102, 0.16) inset;
+    box-shadow: 0 16px 36px -6px rgba(0, 0, 0, 0.55), 0 6px 14px -2px rgba(199, 90, 132, 0.16), 0 0 0 1px rgba(255, 209, 102, 0.22) inset;
   }
 }
 

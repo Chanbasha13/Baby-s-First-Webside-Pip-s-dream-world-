@@ -186,19 +186,34 @@ function LullabyLabShowcase() {
   };
 
   return (
-    <article className="project-showcase-card project-card-acoustic" data-tilt="primary">
+    <article className="project-showcase-card project-card-acoustic">
       <div className="project-showcase-grid">
         {/* Visual & Audio Visualizer Frame */}
         <div className="lullaby-media-frame">
-          <div className="project-artwork-frame project-artwork-lullaby">
-            <img
-              src="/assets/pip_lullaby_box.png"
-              alt="The Lullaby Lab music box with golden winding key and star chimes"
-              className="project-artwork-img lullaby-img"
-              width={1024}
-              height={924}
-              loading="lazy"
-            />
+          <div className="artwork-float-wrapper artwork-float-lullaby">
+            <div
+              className="project-artwork-stage project-artwork-lullaby-stage"
+              data-tilt="artwork"
+              role="region"
+              aria-label="3D Music Box Showcase"
+            >
+              <div className="artwork-atmosphere-halo lullaby-halo-glow" aria-hidden="true" />
+              <div className="artwork-stardust-layer" aria-hidden="true">
+                <span className="star-chime-glyph sc-1">♫</span>
+                <span className="star-chime-glyph sc-2">✦</span>
+                <span className="star-chime-glyph sc-3">♪</span>
+              </div>
+              <div className="artwork-portal-frame project-artwork-lullaby">
+                <img
+                  src="/assets/pip_lullaby_box.png"
+                  alt="The Lullaby Lab music box with golden winding key and star chimes"
+                  className="project-artwork-img lullaby-img"
+                  width={1024}
+                  height={924}
+                  loading="lazy"
+                />
+              </div>
+            </div>
           </div>
 
           {/* Sound Waveform Visualizer */}
@@ -301,21 +316,30 @@ function NightlightCollectionShowcase() {
   };
 
   return (
-    <article className="project-showcase-card project-card-lantern" data-tilt="primary">
+    <article className="project-showcase-card project-card-lantern">
       <div className="project-showcase-grid">
         {/* Visual Frame with Working Light/Dim Toggle */}
         <div className={`nightlight-media-frame ${isRadiant ? 'mode-bright' : 'mode-dim'}`}>
-          <div className="project-artwork-frame project-artwork-nightlight">
-            <SecretClueButton clueId="lantern" className="secret-clue-lantern" />
-            <div className="nightlight-halo-glow" aria-hidden="true" />
-            <img
-              src="/assets/pip_dream_lantern.png"
-              alt="Pip's glowing crescent moon nightlight lantern"
-              className="project-artwork-img nightlight-img"
-              width={1024}
-              height={914}
-              loading="lazy"
-            />
+          <div className="artwork-float-wrapper artwork-float-nightlight">
+            <div
+              className="project-artwork-stage project-artwork-nightlight-stage"
+              data-tilt="artwork"
+              role="region"
+              aria-label="3D Glowing Nightlight Showcase"
+            >
+              <SecretClueButton clueId="lantern" className="secret-clue-lantern" />
+              <div className="artwork-atmosphere-halo nightlight-halo-glow" aria-hidden="true" />
+              <div className="artwork-portal-frame project-artwork-nightlight">
+                <img
+                  src="/assets/pip_dream_lantern.png"
+                  alt="Pip's glowing crescent moon nightlight lantern"
+                  className="project-artwork-img nightlight-img"
+                  width={1024}
+                  height={914}
+                  loading="lazy"
+                />
+              </div>
+            </div>
           </div>
 
           <div className="light-switch-wrap">
@@ -429,12 +453,19 @@ function DreamDeliveryRoutesShowcase() {
   };
 
   return (
-    <article className="project-showcase-card project-card-drafting" data-tilt="primary">
+    <article className="project-showcase-card project-card-drafting">
       <div className="project-showcase-grid">
         {/* Interactive SVG Route Map Frame */}
         <div className="delivery-map-media-frame">
-          <div className="project-artwork-frame project-artwork-routes">
-            <svg
+          <div className="artwork-float-wrapper artwork-float-routes">
+            <div
+              className="project-artwork-stage project-artwork-routes-stage"
+              data-tilt="artwork"
+              role="region"
+              aria-label="Interactive 3D Dream Routes Map"
+            >
+              <div className="artwork-portal-frame project-artwork-routes">
+                <svg
               viewBox="0 0 340 220"
               className="interactive-route-svg"
             fill="none"
@@ -524,7 +555,9 @@ function DreamDeliveryRoutesShowcase() {
               Pillow Haven
             </text>
           </svg>
-        </div>
+              </div>
+            </div>
+          </div>
 
           {/* Destination Selector Pill Chips */}
           <div className="waypoint-selector-row">

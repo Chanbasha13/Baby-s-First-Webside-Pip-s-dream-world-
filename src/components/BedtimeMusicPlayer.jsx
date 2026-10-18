@@ -9,7 +9,7 @@ import {
   handleVisibilityChange,
   handlePageLifecycle,
 } from '../utils/backgroundLullaby';
-
+import { isMuted, toggleMute, subscribeToMute } from '../utils/mute';
 export default function BedtimeMusicPlayer() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(getLullabyVolume());
@@ -94,17 +94,21 @@ export default function BedtimeMusicPlayer() {
     }
   };
 
-  const handleToggleMute = () => {
-    if (volume > 0) {
-      setPrevVolume(volume);
-      setLullabyVolume(0);
-    } else {
-      setLullabyVolume(prevVolume > 0 ? prevVolume : 0.45);
-    }
+  const [muted, setMuted] = useState(isMuted());
+
+  // Subscribe to mute changes
+  useEffect(() => {
+    const unsub = subscribeToMute(setMuted);
+    return () => unsub();
+  }, []);
+
+  const handleToggleMute = async () => {
+    await toggleMute();
   };
 
-  const isMuted = volume === 0;
-  const volumePercent = Math.round(volume * 100);
+  const volumePercent = Math.round((volume ?? 0) * 100);
+
+
 
   return (
     <aside
@@ -196,12 +200,12 @@ export default function BedtimeMusicPlayer() {
             <div className="bedtime-volume-row">
               <button
                 type="button"
-                className={`bedtime-mute-btn ${isMuted ? 'muted' : ''}`}
+                className={`bedtime-mute-btn ${muted ? 'muted' : ''}`}
                 onClick={handleToggleMute}
-                aria-label={isMuted ? 'Unmute lullaby music' : 'Mute lullaby music'}
-                title={isMuted ? 'Unmute' : 'Mute'}
+                aria-label={muted ? 'Unmute lullaby music' : 'Mute lullaby music'}
+                title={muted ? 'Unmute' : 'Mute'}
               >
-                {isMuted ? (
+                {muted ? (
                   <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
                     <path d="M3.63 3.63a.996.996 0 000 1.41L7.29 8.7 7 9H4c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1h3l3.29 3.29c.63.63 1.71.18 1.71-.71v-4.17l4.18 4.18c-.49.37-1.02.68-1.6.91-.36.15-.58.53-.58.92 0 .69.67 1.19 1.32.94.8-.31 1.54-.75 2.2-1.29l1.45 1.45a.996.996 0 101.41-1.41L5.05 3.63a.996.996 0 00-1.42 0zM12 4c0-.89-1.08-1.34-1.71-.71L7.71 5.88l6.29 6.29V4zm4.5 8c0-.82-.25-1.58-.67-2.21l1.5-1.5A6.974 6.974 0 0118 12c0 1.42-.42 2.74-1.15 3.84l-1.47-1.47c.39-.71.62-1.51.62-2.37z" />
                   </svg>
