@@ -14,7 +14,7 @@
 
 ## 🚀 Explore the Dream World
 
-- **Live Website:** [Open Pip's Dream World](YOUR_VERCEL_URL_HERE)
+- **Live Website:** [Open Pip's Dream World](https://pips-dream-world.vercel.app/)
 - **Source Code:** [View this GitHub repository](https://github.com/Chanbasha13/Baby-s-First-Webside-Pip-s-dream-world-)
 
 *Replace `YOUR_VERCEL_URL_HERE` with your actual deployed Vercel URL.*
