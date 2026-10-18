@@ -39,6 +39,58 @@
   will-change: transform;
 }
 
+/* Atmospheric Layered Nebula Lighting Blooms */
+.env-nebula-glow {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(54px);
+  will-change: transform, opacity;
+  transition: opacity var(--transition-slow);
+}
+
+.nebula-gold {
+  top: 6%;
+  right: 14%;
+  width: 340px;
+  height: 280px;
+  background: radial-gradient(circle, rgba(244, 178, 72, 0.16) 0%, rgba(244, 178, 72, 0.05) 50%, transparent 72%);
+  opacity: 0.75;
+}
+
+.nebula-berry {
+  bottom: 22%;
+  left: 6%;
+  width: 380px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(163, 64, 99, 0.09) 0%, rgba(138, 182, 214, 0.06) 45%, transparent 70%);
+  opacity: 0.7;
+}
+
+.nebula-peach {
+  top: 10%;
+  right: 26%;
+  width: 440px;
+  height: 380px;
+  background: radial-gradient(circle, rgba(255, 218, 185, 0.24) 0%, rgba(244, 178, 72, 0.09) 45%, transparent 70%);
+  opacity: 0.8;
+}
+
+[data-theme="midnight"] .nebula-gold {
+  background: radial-gradient(circle, rgba(255, 209, 102, 0.22) 0%, rgba(255, 209, 102, 0.08) 48%, transparent 72%);
+  opacity: 0.85;
+}
+
+[data-theme="midnight"] .nebula-berry {
+  background: radial-gradient(circle, rgba(199, 90, 132, 0.18) 0%, rgba(156, 208, 240, 0.09) 45%, transparent 72%);
+  opacity: 0.8;
+}
+
+[data-theme="midnight"] .nebula-peach {
+  background: radial-gradient(circle, rgba(255, 180, 140, 0.16) 0%, rgba(219, 116, 156, 0.10) 48%, transparent 72%);
+  opacity: 0.85;
+}
+
 /* Crescent Moon */
 .crescent-moon-wrap {
   position: absolute;
@@ -104,6 +156,88 @@
   opacity: 0.6;
 }
 
+/* Ambient Radial Starlight Halo around Crescent Moon */
+.moon-ambient-halo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 170%;
+  height: 170%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 218, 185, 0.35) 0%,
+    rgba(244, 178, 72, 0.14) 45%,
+    transparent 70%
+  );
+  pointer-events: none;
+  animation: haloBreath 8s ease-in-out infinite alternate;
+}
+
+[data-theme="midnight"] .moon-ambient-halo {
+  background: radial-gradient(
+    circle,
+    rgba(255, 209, 102, 0.38) 0%,
+    rgba(199, 90, 132, 0.16) 50%,
+    transparent 70%
+  );
+}
+
+/* Focal-Point Celestial Compass Star near the Moon */
+.hero-focal-compass {
+  position: absolute;
+  top: 14%;
+  right: 23%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-accent-gold);
+  pointer-events: none;
+  animation: focalStarFloat 12s ease-in-out infinite alternate;
+  z-index: 2;
+}
+
+@media (max-width: 960px) {
+  .hero-focal-compass {
+    top: 7%;
+    right: 17%;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-focal-compass {
+    display: none;
+  }
+}
+
+.hero-focal-compass .focal-sparkle {
+  font-size: 2.1rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 12px rgba(244, 178, 72, 0.65));
+  animation: focalStarTwinkle 4s ease-in-out infinite alternate;
+}
+
+[data-theme="midnight"] .hero-focal-compass .focal-sparkle {
+  color: #ffd875;
+  filter: drop-shadow(0 0 16px rgba(255, 209, 102, 0.9));
+}
+
+.hero-focal-compass .focal-ring {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px dashed var(--color-accent-gold);
+  opacity: 0.45;
+  animation: ringRotate 22s linear infinite;
+}
+
+[data-theme="midnight"] .hero-focal-compass .focal-ring {
+  border-color: #ffd875;
+  opacity: 0.6;
+}
+
 /* Interactive Musical Star Chimes */
 .star-chimes-group {
   position: absolute;
@@ -132,8 +266,11 @@
 }
 
 .star-chime-btn:hover {
-  transform: scale(1.35) rotate(6deg);
   filter: drop-shadow(0 0 14px var(--color-accent-gold));
+}
+
+.star-chime-btn:hover .star-chime-glyph {
+  transform: scale(1.2) rotate(6deg);
 }
 
 [data-theme="midnight"] .star-chime-btn:hover {
@@ -147,10 +284,16 @@
 }
 
 .star-chime-glyph {
-  font-size: 1.3rem;
+  font-size: 1.65rem;
   line-height: 1;
   display: block;
-  transition: transform 180ms ease;
+  filter: drop-shadow(0 0 8px rgba(244, 178, 72, 0.45));
+  transition: transform 180ms ease, filter 180ms ease;
+}
+
+[data-theme="midnight"] .star-chime-glyph {
+  color: #ffd875;
+  filter: drop-shadow(0 0 10px rgba(255, 209, 102, 0.7));
 }
 
 .star-chime-btn:active .star-chime-glyph {
@@ -159,11 +302,16 @@
 
 .star-chime-aura {
   position: absolute;
-  inset: -6px;
+  inset: -8px;
   border-radius: var(--radius-pill);
-  border: 1.5px solid transparent;
+  border: 1.5px solid rgba(244, 178, 72, 0.35);
   pointer-events: none;
+  animation: starChimeBreathe 4s ease-in-out infinite alternate;
   transition: border-color 200ms ease;
+}
+
+[data-theme="midnight"] .star-chime-aura {
+  border-color: rgba(255, 209, 102, 0.45);
 }
 
 .star-chime-btn:hover .star-chime-aura {
@@ -228,7 +376,7 @@
   }
 
   .star-chime-glyph {
-    font-size: 1.05rem;
+    font-size: 1.25rem;
   }
 
   .star-chime-lyra {
@@ -252,12 +400,12 @@
   }
 
   .ambient-decorative-stars {
-    opacity: 0.35;
+    opacity: 0.45;
     pointer-events: none;
   }
 }
 
-/* Twinkling Ambient Starfield */
+/* Twinkling Ambient Starfield — Richer & Larger Perimeter Stars */
 .twinkle-star {
   position: absolute;
   display: block;
@@ -270,40 +418,68 @@
 }
 
 .twinkle-star:hover {
-  filter: brightness(1.5) drop-shadow(0 0 10px var(--color-accent-gold));
-  transform: scale(1.3);
+  animation-play-state: paused;
+  filter: brightness(1.5) drop-shadow(0 0 14px var(--color-accent-gold));
+  transform: scale(1.22);
 }
 
 [data-theme="midnight"] .twinkle-star {
   color: #ffd875;
-  text-shadow: 0 0 8px rgba(255, 216, 117, 0.6);
+  text-shadow: 0 0 10px rgba(255, 216, 117, 0.75);
 }
 
-.star-p1 { top: 12%; left: 14%; font-size: 1.2rem; animation-delay: 0.2s; }
-.star-p2 { top: 22%; left: 32%; font-size: 0.85rem; animation-delay: 1.4s; }
-.star-p3 { top: 8%; left: 62%; font-size: 1.35rem; animation-delay: 2.1s; }
-.star-p4 { top: 28%; right: 18%; font-size: 0.95rem; animation-delay: 0.7s; }
-.star-p5 { top: 48%; left: 8%; font-size: 1.1rem; animation-delay: 2.8s; }
-.star-p6 { top: 58%; right: 28%; font-size: 0.85rem; animation-delay: 1.9s; }
-.star-p7 { top: 72%; left: 24%; font-size: 1.25rem; animation-delay: 3.2s; }
-.star-p8 { top: 80%; right: 12%; font-size: 1rem; animation-delay: 0.4s; }
+.star-p1 { top: 8%; left: 24%; font-size: 1.6rem; animation-delay: 0.2s; }
+.star-p2 { top: 24%; left: 6%; font-size: 1.45rem; animation-delay: 1.4s; }
+.star-p3 { top: 6%; left: 44%; font-size: 1.5rem; animation-delay: 2.1s; }
+.star-p4 { top: 18%; right: 24%; font-size: 1.85rem; animation-delay: 0.7s; }
+.star-p5 { top: 42%; left: 4%; font-size: 1.4rem; animation-delay: 2.8s; }
+.star-p6 { top: 60%; right: 6%; font-size: 1.45rem; animation-delay: 1.9s; }
+.star-p7 { top: 76%; left: 14%; font-size: 1.55rem; animation-delay: 3.2s; }
+.star-p8 { top: 82%; right: 16%; font-size: 1.35rem; animation-delay: 0.4s; }
 
-/* Constellation Guide Lines */
+/* Constellation Guide Lines & Curved Trails */
 .constellation-lines {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
+  pointer-events: none;
+}
+
+.constellation-curve {
   stroke: var(--color-border-warm);
-  stroke-width: 1;
-  stroke-dasharray: 3 6;
-  opacity: 0.35;
+  stroke-width: 1.25;
+  stroke-dasharray: 4 8;
+  opacity: 0.45;
   transition: opacity var(--transition-slow), stroke var(--transition-slow);
 }
 
-[data-theme="midnight"] .constellation-lines {
+[data-theme="midnight"] .constellation-curve {
   stroke: #725688;
-  opacity: 0.45;
+  opacity: 0.55;
+  stroke-width: 1.4;
+}
+
+.constellation-node.node-gold {
+  fill: var(--color-accent-gold);
+  filter: drop-shadow(0 0 4px rgba(244, 178, 72, 0.5));
+}
+
+[data-theme="midnight"] .constellation-node.node-gold {
+  fill: #ffd875;
+  filter: drop-shadow(0 0 6px rgba(255, 209, 102, 0.8));
+}
+
+.constellation-node.node-berry {
+  fill: var(--color-berry);
+  opacity: 0.75;
+  filter: drop-shadow(0 0 4px rgba(163, 64, 99, 0.4));
+}
+
+[data-theme="midnight"] .constellation-node.node-berry {
+  fill: #e88eb0;
+  opacity: 0.85;
+  filter: drop-shadow(0 0 6px rgba(232, 142, 176, 0.7));
 }
 
 /* Layer 2: Distant Floating Cloud Banks */
@@ -325,25 +501,29 @@
 }
 
 .cloud-bank-top {
-  top: 15%;
-  height: 120px;
+  top: 12%;
+  height: 140px;
   animation: cloudDriftSlow 52s linear infinite;
-  opacity: 0.55;
+  opacity: 0.5;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.75) 50%, transparent 95%);
+  -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.75) 50%, transparent 95%);
 }
 
 .cloud-bank-bottom {
   bottom: 0;
-  height: 120px;
+  height: 130px;
   animation: cloudDriftReverse 68s linear infinite;
-  opacity: 0.55;
+  opacity: 0.52;
+  mask-image: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.8) 55%, transparent 95%);
+  -webkit-mask-image: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.8) 55%, transparent 95%);
 }
 
 [data-theme="midnight"] .cloud-bank-top {
-  opacity: 0.35;
+  opacity: 0.32;
 }
 
 [data-theme="midnight"] .cloud-bank-bottom {
-  opacity: 0.48;
+  opacity: 0.44;
 }
 
 .cloud-shape-path {
@@ -391,19 +571,27 @@
   background: linear-gradient(180deg, var(--color-border-warm) 0%, var(--color-accent-gold) 100%);
 }
 
-.mobile-ornament {
+.mobile-ornament-ring {
   margin-top: -2px;
-  width: 28px;
-  height: 28px;
+  width: 36px;
+  height: 36px;
   border-radius: var(--radius-pill);
   background-color: var(--color-surface);
   border: 1.5px solid var(--color-accent-gold);
-  box-shadow: 0 4px 12px rgba(244, 178, 72, 0.3);
+  box-shadow: 0 4px 14px rgba(244, 178, 72, 0.35);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.85rem;
+  font-size: 1.15rem;
   color: var(--color-accent-gold);
+  transition: background var(--transition-slow), border-color var(--transition-slow);
+}
+
+[data-theme="midnight"] .mobile-ornament-ring {
+  background-color: #2b223a;
+  border-color: #ffd875;
+  color: #ffd875;
+  box-shadow: 0 4px 18px rgba(255, 209, 102, 0.4);
 }
 
 /* Floating Stardust Whispers */
@@ -562,6 +750,48 @@
   }
 }
 
+@keyframes focalStarFloat {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    transform: translateY(-10px) scale(1.05);
+  }
+}
+
+@keyframes focalStarTwinkle {
+  0% {
+    transform: scale(0.92);
+    opacity: 0.75;
+    filter: drop-shadow(0 0 10px rgba(244, 178, 72, 0.5));
+  }
+  100% {
+    transform: scale(1.1);
+    opacity: 1;
+    filter: drop-shadow(0 0 18px rgba(244, 178, 72, 0.85));
+  }
+}
+
+@keyframes ringRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes starChimeBreathe {
+  0% {
+    transform: scale(0.92);
+    opacity: 0.45;
+  }
+  100% {
+    transform: scale(1.12);
+    opacity: 0.85;
+  }
+}
+
 /* ==========================================================================
    Accessibility: Reduced Motion
    ========================================================================== */
@@ -572,13 +802,19 @@
   .env-layer-fore,
   .crescent-moon-wrap,
   .moon-halo,
+  .moon-ambient-halo,
+  .hero-focal-compass,
+  .focal-sparkle,
+  .focal-ring,
   .twinkle-star,
   .cloud-bank-top,
   .cloud-bank-bottom,
   .hanging-nursery-mobile,
+  .mobile-ornament-ring,
   .stardust-whisper,
   .pip-celestial-halo,
   .pip-character-float-wrap,
+  .env-nebula-glow,
   .star-chime-aura {
     animation: none !important;
     transform: none !important;

@@ -89,7 +89,6 @@
 }
 
 .project-showcase-card:hover {
-  transform: translateY(-4px);
   border-color: var(--color-berry-border);
   box-shadow: var(--shadow-md), 0 12px 32px rgba(163, 64, 99, 0.08);
 }
@@ -160,9 +159,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: var(--space-xl);
+  padding: clamp(20px, 3.2vw, 32px);
   height: 100%;
-  min-height: 360px;
+  min-height: 380px;
   border-right: 1.5px solid var(--color-border-subtle);
   transition: background var(--transition-normal);
 }
@@ -210,7 +209,6 @@
 }
 
 .project-showcase-card:hover .project-artwork-frame {
-  transform: scale(1.02);
   border-color: var(--color-berry-border);
   box-shadow: 0 12px 32px rgba(61, 39, 29, 0.14), inset 0 0 0 1px rgba(255, 255, 255, 0.6);
 }
@@ -286,6 +284,7 @@
 .lullaby-controls-row {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: var(--space-sm);
   margin-top: var(--space-md);
   flex-wrap: wrap;
@@ -318,14 +317,13 @@
   border: 1.5px solid var(--color-berry);
   background-color: var(--color-berry);
   color: #ffffff;
-  transition: all var(--transition-fast);
+  transition: background-color var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast), color var(--transition-fast);
   box-shadow: 0 4px 12px rgba(163, 64, 99, 0.25);
   min-height: 42px;
 }
 
 .audio-play-btn:hover {
   background-color: var(--color-berry-hover);
-  transform: translateY(-2px);
   box-shadow: 0 6px 18px rgba(163, 64, 99, 0.35);
 }
 
@@ -356,7 +354,7 @@
   background-color: var(--color-bg);
   border: 1px solid var(--color-border-warm);
   border-radius: var(--radius-pill);
-  transition: all var(--transition-fast);
+  transition: color var(--transition-fast), border-color var(--transition-fast), background-color var(--transition-fast);
 }
 
 .audio-status-pill.is-active {
@@ -393,9 +391,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: var(--space-xl);
+  padding: clamp(20px, 3.2vw, 32px);
   height: 100%;
-  min-height: 360px;
+  min-height: 380px;
   border-right: 1.5px solid var(--color-border-subtle);
   transition: background var(--transition-slow);
 }
@@ -421,7 +419,7 @@
   height: 220px;
   border-radius: var(--radius-pill);
   pointer-events: none;
-  transition: all var(--transition-slow);
+  transition: box-shadow var(--transition-slow), opacity var(--transition-slow);
 }
 
 .mode-dim .nightlight-halo-glow {
@@ -455,6 +453,7 @@
 .light-switch-wrap {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: var(--space-sm);
   margin-top: var(--space-md);
   flex-wrap: wrap;
@@ -488,13 +487,13 @@
   background-color: var(--color-surface);
   color: var(--color-text-main);
   box-shadow: var(--shadow-xs);
-  transition: all var(--transition-fast);
+  transition: background-color var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast), color var(--transition-fast);
   min-height: 42px;
 }
 
 .lantern-toggle-btn:hover {
   background-color: var(--color-accent-gold-soft);
-  transform: translateY(-2px);
+  border-color: var(--color-accent-gold-border);
 }
 
 .lantern-toggle-btn.is-radiant {
@@ -509,11 +508,13 @@
 
 .delivery-map-media-frame {
   position: relative;
-  padding: var(--space-lg);
+  padding: clamp(20px, 3.2vw, 32px);
   background: var(--color-bg);
   height: 100%;
+  min-height: 380px;
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
   border-right: 1.5px solid var(--color-border-subtle);
 }
@@ -550,11 +551,13 @@
 .map-waypoint-btn {
   cursor: pointer;
   outline: none;
+  transform-box: fill-box;
+  transform-origin: center;
   transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1), filter 220ms ease;
 }
 
 .map-waypoint-btn:hover {
-  transform: scale(1.18);
+  transform: scale(1.1);
   filter: drop-shadow(0 0 8px rgba(163, 64, 99, 0.5));
 }
 
@@ -609,7 +612,7 @@
   font-weight: 600;
   color: var(--color-text-muted);
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: color var(--transition-fast), border-color var(--transition-fast), background-color var(--transition-fast), box-shadow var(--transition-fast);
   min-height: 40px;
   display: inline-flex;
   align-items: center;
@@ -619,7 +622,6 @@
 .waypoint-chip:hover {
   border-color: var(--color-berry-border);
   color: var(--color-berry);
-  transform: translateY(-1px);
 }
 
 .waypoint-chip.is-active {
@@ -627,20 +629,28 @@
   color: #ffffff;
   border-color: var(--color-berry);
   box-shadow: 0 3px 10px rgba(163, 64, 99, 0.25);
-  transform: translateY(-1px);
 }
 
 /* Route Dispatch Box */
 .route-dispatch-card {
+  width: 100%;
+  max-width: 340px;
   margin-top: var(--space-md);
-  padding: var(--space-md);
+  padding: 12px 16px;
   background-color: var(--color-surface);
   border: 1.5px dashed var(--color-border-warm);
   border-radius: var(--radius-md);
   font-size: 0.88rem;
   line-height: 1.55;
   color: var(--color-text-muted);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
   animation: dispatchCardEnter 240ms ease-out;
+}
+
+[data-theme="midnight"] .route-dispatch-card {
+  background-color: #1f172c;
+  border-color: #553e68;
+  box-shadow: inset 0 1px 0 rgba(255, 209, 102, 0.08);
 }
 
 @keyframes dispatchCardEnter {
@@ -731,7 +741,7 @@
   color: var(--color-text-muted);
   cursor: pointer;
   align-self: flex-start;
-  transition: all var(--transition-fast);
+  transition: color var(--transition-fast), border-color var(--transition-fast), background-color var(--transition-fast);
 }
 
 .showcase-specs-toggle-btn:hover {
@@ -771,7 +781,7 @@
   border: 2px dashed var(--color-accent-gold-border);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-sm);
-  transition: all var(--transition-normal);
+  transition: border-color var(--transition-normal), box-shadow var(--transition-normal), background var(--transition-normal);
 }
 
 [data-theme="midnight"] .projects-game-invite-card {
@@ -780,8 +790,7 @@
 }
 
 .projects-game-invite-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-md), 0 8px 24px rgba(244, 178, 72, 0.15);
   border-color: var(--color-accent-gold);
 }
 

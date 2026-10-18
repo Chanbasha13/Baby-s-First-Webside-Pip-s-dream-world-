@@ -60,9 +60,10 @@ export function initStorybookTilt() {
     const percentX = Math.max(0, Math.min(100, (relX / width) * 100)).toFixed(1);
     const percentY = Math.max(0, Math.min(100, (relY / height) * 100)).toFixed(1);
 
-    // Tasteful restrained range: 3.2° for primary, 2.0° for secondary
-    const maxRot = isSecondary ? 2.0 : 3.2;
-    const lift = isSecondary ? '-2.8px' : '-5.5px';
+    // Tasteful restrained range: 1.0° for primary, 0.7° for secondary
+    // Lift is strictly 0px so cards remain stationary and never jump or fight cursor hit areas
+    const maxRot = isSecondary ? 0.7 : 1.0;
+    const lift = '0px';
     const rotX = (-normY * maxRot).toFixed(2);
     const rotY = (normX * maxRot).toFixed(2);
 
@@ -76,6 +77,10 @@ export function initStorybookTilt() {
     rafId = null;
   };
 
+  const isInteractiveTarget = (target) => {
+    return !!target?.closest('button, a, input, textarea, select, .secret-clue-btn, .map-waypoint-btn, [role="button"], [tabindex="0"]');
+  };
+
   const onPointerOver = (e) => {
     const card = e.target.closest('[data-tilt], .storybook-tilt-card');
     if (!card) return;
@@ -87,6 +92,16 @@ export function initStorybookTilt() {
     activeCard = card;
     activeRect = card.getBoundingClientRect();
     isSecondary = card.getAttribute('data-tilt') === 'secondary' || card.classList.contains('tilt-secondary');
+
+    if (isInteractiveTarget(e.target)) {
+      resetCard(activeCard);
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+      return;
+    }
+
     pendingX = e.clientX;
     pendingY = e.clientY;
 
@@ -106,6 +121,15 @@ export function initStorybookTilt() {
       } else {
         return;
       }
+    }
+
+    if (isInteractiveTarget(e.target)) {
+      resetCard(activeCard);
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+      return;
     }
 
     pendingX = e.clientX;

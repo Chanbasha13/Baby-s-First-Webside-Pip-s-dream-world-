@@ -128,7 +128,7 @@
   font-size: 0.9rem;
   color: var(--color-text-main);
   outline: none;
-  transition: all var(--transition-fast);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
 }
 
 .guestbook-author-field:focus {
@@ -152,7 +152,7 @@
   font-size: 0.95rem;
   color: var(--color-text-main);
   outline: none;
-  transition: all var(--transition-fast);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
   resize: vertical;
   min-height: 72px;
 }
@@ -297,7 +297,6 @@
   border-color: var(--color-berry-border);
   border-left-color: var(--color-berry-hover);
   box-shadow: 0 6px 18px rgba(61, 39, 29, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9);
-  transform: translateY(-2px);
 }
 
 [data-theme="midnight"] .entry-card {

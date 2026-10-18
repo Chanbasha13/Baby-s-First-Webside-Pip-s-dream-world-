@@ -25,8 +25,7 @@ export default function CelestialDreamEnvironment() {
   const currentXRef = useRef(0);
   const currentYRef = useRef(0);
 
-  // Hidden Easter Egg State (Click the moon 3 times or ?secret=true)
-  const [moonClicks, setMoonClicks] = useState(0);
+  const moonClicksRef = useRef(0);
   const [pulseClick, setPulseClick] = useState(false);
   const [activeStarId, setActiveStarId] = useState(null);
   const [easterEggOpen, setEasterEggOpen] = useState(() => {
@@ -125,18 +124,15 @@ export default function CelestialDreamEnvironment() {
     setPulseClick(true);
     setTimeout(() => setPulseClick(false), 300);
 
-    setMoonClicks((prev) => {
-      const next = prev + 1;
-      if (next >= 3) {
-        setEasterEggOpen(true);
-        playEasterEggFanfare();
-        triggerMoonEasterEgg();
-        return 0;
-      } else {
-        playGentleChime(650 + next * 140, 0.18);
-        return next;
-      }
-    });
+    moonClicksRef.current += 1;
+    if (moonClicksRef.current >= 3) {
+      moonClicksRef.current = 0;
+      setEasterEggOpen(true);
+      playEasterEggFanfare();
+      triggerMoonEasterEgg();
+    } else {
+      playGentleChime(650 + moonClicksRef.current * 140, 0.18);
+    }
   };
 
   const handleStarChime = (star) => {
@@ -152,10 +148,16 @@ export default function CelestialDreamEnvironment() {
     <>
       <div className="dream-env-root" ref={containerRef}>
         <div className="dream-env-stage">
-          {/* Layer 1: Far Deep Sky (Moon, Constellations, Twinkling Stars) */}
+          {/* Layer 1: Far Deep Sky (Moon, Constellations, Twinkling Stars, Soft Nebulae) */}
           <div className="env-layer-deep">
+            {/* Ambient Soft Nebula Lighting Blooms */}
+            <div className="env-nebula-glow nebula-gold" aria-hidden="true" />
+            <div className="env-nebula-glow nebula-berry" aria-hidden="true" />
+            <div className="env-nebula-glow nebula-peach" aria-hidden="true" />
+
             {/* Interactive Crescent Moon (Clickable Easter Egg) */}
             <div className="crescent-moon-wrap">
+              <div className="moon-ambient-halo" aria-hidden="true" />
               <button
                 ref={moonBtnRef}
                 type="button"
@@ -185,11 +187,25 @@ export default function CelestialDreamEnvironment() {
               </button>
             </div>
 
-            {/* Starlight Constellation Lines (Purely Decorative) */}
+            {/* Focal-Point Celestial Compass Star near the Moon */}
+            <div className="hero-focal-compass" aria-hidden="true">
+              <span className="focal-ring" />
+              <span className="focal-sparkle">✦</span>
+            </div>
+
+            {/* Starlight Constellation Curved Trails & Nodes (Purely Decorative) */}
             <svg className="constellation-lines" viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true">
-              <path d="M 140 70 L 320 130 L 450 60 L 620 150" fill="none" />
-              <path d="M 700 240 L 820 170 L 920 280" fill="none" />
-              <path d="M 80 290 L 240 430 L 380 370" fill="none" />
+              <path className="constellation-curve" d="M 120 75 C 240 120, 380 85, 520 60 S 740 115, 880 75" fill="none" />
+              <path className="constellation-curve" d="M 660 175 C 760 125, 870 160, 960 110" fill="none" />
+              <path className="constellation-curve" d="M 70 290 C 180 380, 290 320, 410 400" fill="none" />
+
+              <circle cx="120" cy="75" r="3" className="constellation-node node-gold" />
+              <circle cx="520" cy="60" r="2.5" className="constellation-node node-berry" />
+              <circle cx="880" cy="75" r="3" className="constellation-node node-gold" />
+              <circle cx="660" cy="175" r="2.5" className="constellation-node node-gold" />
+              <circle cx="960" cy="110" r="3" className="constellation-node node-berry" />
+              <circle cx="70" cy="290" r="2.5" className="constellation-node node-gold" />
+              <circle cx="410" cy="400" r="3" className="constellation-node node-gold" />
             </svg>
 
             {/* Designated Musical Star Chimes (Interactive on Hover, Tap & Keyboard) */}
@@ -212,11 +228,15 @@ export default function CelestialDreamEnvironment() {
               ))}
             </div>
 
-            {/* Ambient Decorative Stars (Gentle soft twinkle) */}
+            {/* Rich Ambient Decorative Stars (Distinctive sizes & positions) */}
             <div className="ambient-decorative-stars" aria-hidden="true">
+              <span className="twinkle-star star-p1">✦</span>
               <span className="twinkle-star star-p2">★</span>
+              <span className="twinkle-star star-p3">✧</span>
+              <span className="twinkle-star star-p4">✵</span>
               <span className="twinkle-star star-p5">✧</span>
               <span className="twinkle-star star-p6">★</span>
+              <span className="twinkle-star star-p7">✦</span>
               <span className="twinkle-star star-p8">⋆</span>
             </div>
           </div>
@@ -250,7 +270,9 @@ export default function CelestialDreamEnvironment() {
           <div className="env-layer-fore" aria-hidden="true">
             <div className="hanging-nursery-mobile">
               <div className="mobile-string" />
-              <div className="mobile-ornament">✦</div>
+              <div className="mobile-ornament-ring">
+                <span className="ornament-glyph">✧</span>
+              </div>
             </div>
 
             <span className="stardust-whisper whisper-1">✧</span>

@@ -1,0 +1,449 @@
+/* ==========================================================================
+   Pip's Dream World — Persistent Celestial Environment Styles
+   Shared fixed viewport background for consistent, rich celestial depth
+   ========================================================================== */
+
+/* Fixed Viewport Root Canvas */
+.persistent-celestial-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  overflow: clip;
+  contain: strict;
+  user-select: none;
+}
+
+/* --------------------------------------------------------------------------
+   1. Atmospheric Ambient Lighting Glows
+   -------------------------------------------------------------------------- */
+.persistent-nebula {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(60px);
+  will-change: opacity, transform;
+  transition: opacity var(--transition-slow), background var(--transition-slow);
+}
+
+/* Top-Right Soft Peach / Warm Gold Glow */
+.persistent-nebula-peach {
+  top: -8%;
+  right: -5%;
+  width: 520px;
+  height: 480px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 218, 185, 0.22) 0%,
+    rgba(244, 178, 72, 0.12) 42%,
+    transparent 70%
+  );
+  opacity: 0.85;
+  animation: persistentBreathe 16s ease-in-out infinite alternate;
+}
+
+[data-theme="midnight"] .persistent-nebula-peach {
+  background: radial-gradient(
+    circle,
+    rgba(255, 209, 102, 0.18) 0%,
+    rgba(219, 116, 156, 0.12) 45%,
+    transparent 72%
+  );
+  opacity: 0.9;
+}
+
+/* Mid-Left Soft Berry / Twilight Sky Glow */
+.persistent-nebula-berry {
+  top: 38%;
+  left: -8%;
+  width: 480px;
+  height: 440px;
+  background: radial-gradient(
+    circle,
+    rgba(163, 64, 99, 0.08) 0%,
+    rgba(138, 182, 214, 0.07) 40%,
+    transparent 68%
+  );
+  opacity: 0.8;
+  animation: persistentBreathe 20s ease-in-out infinite alternate-reverse;
+}
+
+[data-theme="midnight"] .persistent-nebula-berry {
+  background: radial-gradient(
+    circle,
+    rgba(199, 90, 132, 0.16) 0%,
+    rgba(156, 208, 240, 0.09) 45%,
+    transparent 70%
+  );
+  opacity: 0.85;
+}
+
+/* Lower-Right Starlight Gold Haze */
+.persistent-nebula-gold {
+  bottom: -6%;
+  right: 5%;
+  width: 440px;
+  height: 380px;
+  background: radial-gradient(
+    circle,
+    rgba(244, 178, 72, 0.10) 0%,
+    rgba(255, 218, 185, 0.08) 45%,
+    transparent 70%
+  );
+  opacity: 0.75;
+  animation: persistentBreathe 18s ease-in-out infinite alternate;
+}
+
+[data-theme="midnight"] .persistent-nebula-gold {
+  background: radial-gradient(
+    circle,
+    rgba(255, 209, 102, 0.14) 0%,
+    rgba(199, 90, 132, 0.09) 50%,
+    transparent 70%
+  );
+  opacity: 0.85;
+}
+
+@keyframes persistentBreathe {
+  0% {
+    transform: scale(0.96) translate(0, 0);
+  }
+  100% {
+    transform: scale(1.05) translate(8px, 6px);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   2. Viewport Constellation Map & Curved Dashed Trails
+   -------------------------------------------------------------------------- */
+.persistent-constellation-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.persistent-trail {
+  fill: none;
+  stroke: var(--color-border-warm);
+  stroke-width: 1.25;
+  stroke-dasharray: 4 8;
+  opacity: 0.45;
+  transition: stroke var(--transition-slow), opacity var(--transition-slow);
+}
+
+[data-theme="midnight"] .persistent-trail {
+  stroke: #6f5485;
+  opacity: 0.55;
+  stroke-width: 1.4;
+}
+
+.persistent-trail-cross {
+  stroke-dasharray: 3 9;
+  opacity: 0.32;
+}
+
+[data-theme="midnight"] .persistent-trail-cross {
+  opacity: 0.42;
+}
+
+/* Constellation Nodes along Trails */
+.persistent-node {
+  transition: fill var(--transition-slow);
+}
+
+.node-gold {
+  fill: var(--color-accent-gold);
+  filter: drop-shadow(0 0 4px rgba(244, 178, 72, 0.5));
+}
+
+[data-theme="midnight"] .node-gold {
+  fill: #ffd875;
+  filter: drop-shadow(0 0 6px rgba(255, 209, 102, 0.8));
+}
+
+.node-berry {
+  fill: var(--color-berry);
+  opacity: 0.75;
+  filter: drop-shadow(0 0 4px rgba(163, 64, 99, 0.4));
+}
+
+[data-theme="midnight"] .node-berry {
+  fill: #e88eb0;
+  opacity: 0.85;
+  filter: drop-shadow(0 0 6px rgba(232, 142, 176, 0.7));
+}
+
+/* --------------------------------------------------------------------------
+   3. Viewport Margin Celestial Focal Stars & Twinkles
+   -------------------------------------------------------------------------- */
+.persistent-stars-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.persistent-star {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-accent-gold);
+  line-height: 1;
+  user-select: none;
+  transition: color var(--transition-slow);
+  animation: persistentStarTwinkle 5s ease-in-out infinite alternate;
+}
+
+[data-theme="midnight"] .persistent-star {
+  color: #ffd875;
+}
+
+.persistent-star .star-glyph {
+  display: block;
+  line-height: 1;
+  filter: drop-shadow(0 0 6px rgba(244, 178, 72, 0.45));
+}
+
+[data-theme="midnight"] .persistent-star .star-glyph {
+  filter: drop-shadow(0 0 8px rgba(255, 209, 102, 0.75));
+}
+
+.persistent-star .star-halo {
+  position: absolute;
+  width: 180%;
+  height: 180%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(244, 178, 72, 0.22) 0%, transparent 70%);
+  pointer-events: none;
+  animation: haloBreath 6s ease-in-out infinite alternate;
+}
+
+[data-theme="midnight"] .persistent-star .star-halo {
+  background: radial-gradient(circle, rgba(255, 209, 102, 0.32) 0%, transparent 70%);
+}
+
+/* Specific Margin Placement to Frame Content Beautifully */
+.star-focal-top-right {
+  top: 7%;
+  right: 4.5%;
+  font-size: 1.75rem;
+  animation-delay: 0.4s;
+}
+
+.star-diamond-top-left {
+  top: 9%;
+  left: 3.5%;
+  font-size: 1.4rem;
+  animation-delay: 1.8s;
+}
+
+.star-cluster-mid-left {
+  top: 44%;
+  left: 2.2%;
+  font-size: 1.55rem;
+  animation-delay: 2.6s;
+}
+
+.star-cluster-mid-left .glyph-sparkle {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  font-size: 1rem;
+  color: var(--color-berry);
+  opacity: 0.8;
+}
+
+[data-theme="midnight"] .star-cluster-mid-left .glyph-sparkle {
+  color: #e88eb0;
+}
+
+.star-gold-mid-right {
+  top: 52%;
+  right: 2.5%;
+  font-size: 1.25rem;
+  animation-delay: 3.4s;
+}
+
+.star-diamond-bot-left {
+  bottom: 8%;
+  left: 4%;
+  font-size: 1.35rem;
+  animation-delay: 1.2s;
+}
+
+.star-focal-bot-right {
+  bottom: 9%;
+  right: 3.5%;
+  font-size: 1.6rem;
+  animation-delay: 2.1s;
+}
+
+/* Subtle Stardust Motes */
+.persistent-mote {
+  position: absolute;
+  color: var(--color-accent-gold);
+  opacity: 0.5;
+  font-size: 0.95rem;
+  line-height: 1;
+  animation: persistentMoteBlink 4s ease-in-out infinite alternate;
+}
+
+[data-theme="midnight"] .persistent-mote {
+  color: #ffd875;
+  opacity: 0.65;
+}
+
+.mote-1 { top: 22%; left: 1.8%; animation-delay: 0.7s; }
+.mote-2 { top: 28%; right: 4.8%; animation-delay: 1.9s; }
+.mote-3 { top: 68%; left: 3.2%; animation-delay: 3.1s; }
+.mote-4 { top: 78%; right: 2.2%; animation-delay: 0.3s; }
+.mote-5 { top: 88%; left: 6%; animation-delay: 2.4s; }
+
+/* Twinkle & Halo Keyframes */
+@keyframes persistentStarTwinkle {
+  0% {
+    transform: scale(0.92);
+    opacity: 0.7;
+    filter: brightness(0.95);
+  }
+  50% {
+    opacity: 0.95;
+    filter: brightness(1.2);
+  }
+  100% {
+    transform: scale(1.12);
+    opacity: 1;
+    filter: brightness(1.35);
+  }
+}
+
+@keyframes haloBreath {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.2);
+    opacity: 0.95;
+  }
+}
+
+@keyframes persistentMoteBlink {
+  0% {
+    opacity: 0.25;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 0.75;
+    transform: scale(1.15);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   4. Responsive Adjustments (Zero Horizontal Overflow, Balanced Density)
+   -------------------------------------------------------------------------- */
+@media (max-width: 960px) {
+  .persistent-nebula-peach {
+    width: 380px;
+    height: 340px;
+  }
+
+  .persistent-nebula-berry {
+    width: 340px;
+    height: 300px;
+  }
+
+  .star-focal-top-right {
+    font-size: 1.4rem;
+    right: 2.5%;
+  }
+
+  .star-diamond-top-left {
+    font-size: 1.15rem;
+    left: 2%;
+  }
+
+  .star-cluster-mid-left {
+    font-size: 1.25rem;
+    left: 1.5%;
+  }
+
+  .star-gold-mid-right {
+    font-size: 1.05rem;
+    right: 1.8%;
+  }
+
+  .star-diamond-bot-left {
+    font-size: 1.1rem;
+    left: 2%;
+  }
+
+  .star-focal-bot-right {
+    font-size: 1.3rem;
+    right: 2%;
+  }
+}
+
+@media (max-width: 640px) {
+  .persistent-constellation-svg {
+    opacity: 0.6;
+  }
+
+  .persistent-nebula {
+    filter: blur(45px);
+  }
+
+  .star-focal-top-right {
+    font-size: 1.15rem;
+    top: 5%;
+    right: 2%;
+  }
+
+  .star-diamond-top-left {
+    font-size: 1rem;
+    top: 6%;
+    left: 2%;
+  }
+
+  .star-cluster-mid-left {
+    display: none;
+  }
+
+  .star-gold-mid-right {
+    font-size: 0.95rem;
+    right: 1.5%;
+  }
+
+  .star-diamond-bot-left {
+    display: none;
+  }
+
+  .star-focal-bot-right {
+    font-size: 1.1rem;
+    bottom: 6%;
+    right: 2%;
+  }
+
+  .mote-1, .mote-3, .mote-5 {
+    display: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   5. Reduced Motion Compliance
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .persistent-nebula,
+  .persistent-star,
+  .persistent-star .star-halo,
+  .persistent-mote {
+    animation: none !important;
+    transition: none !important;
+  }
+}

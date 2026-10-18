@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { playStarCatchSound, playGameVictorySound, isSoundEnabled } from '../utils/chimes';
 import { usePipPersonality } from '../context/PipPersonalityContext';
+import { SecretClueButton } from '../components/SecretDreamQuest';
 
 // Game constants
 const ROUND_DURATION = 30; // 30 seconds round
@@ -226,8 +227,12 @@ export default function CatchDreamsGameSection() {
   // Personal Best from localStorage
   const [personalBest, setPersonalBest] = useState(() => {
     if (typeof window !== 'undefined') {
-      const stored = localStorage.getItem(STORAGE_KEY_BEST);
-      return stored ? parseInt(stored, 10) || 0 : 0;
+      try {
+        const stored = localStorage.getItem(STORAGE_KEY_BEST);
+        return stored ? parseInt(stored, 10) || 0 : 0;
+      } catch {
+        // Storage access blocked
+      }
     }
     return 0;
   });
@@ -386,12 +391,21 @@ export default function CatchDreamsGameSection() {
     setStars([]);
 
     // Check personal best
-    const previousBest = parseInt(localStorage.getItem(STORAGE_KEY_BEST) || '0', 10);
+    let previousBest = 0;
+    try {
+      previousBest = parseInt(localStorage.getItem(STORAGE_KEY_BEST) || '0', 10);
+    } catch {
+      // Storage access blocked
+    }
     const newRecord = finalScore > previousBest;
     const reachedTarget = finalScore >= TARGET_CELEBRATION_SCORE;
 
     if (newRecord) {
-      localStorage.setItem(STORAGE_KEY_BEST, String(finalScore));
+      try {
+        localStorage.setItem(STORAGE_KEY_BEST, String(finalScore));
+      } catch {
+        // Storage access blocked or quota exceeded
+      }
       setPersonalBest(finalScore);
       setIsNewRecord(true);
     }
@@ -511,6 +525,7 @@ export default function CatchDreamsGameSection() {
 
   return (
     <section id="catch-dreams" className="catch-dreams-section">
+      <span id="game" aria-hidden="true" style={{ position: 'relative', top: '-80px', display: 'block' }} />
       <div className="container">
         {/* Section Header */}
         <div className="section-header-block">
@@ -547,6 +562,7 @@ export default function CatchDreamsGameSection() {
               <div className="game-intro-grid">
                 {/* Storybook Pip Character Frame */}
                 <div className="game-intro-media">
+                  <SecretClueButton clueId="moon" className="secret-clue-moon" />
                   <div className="game-pip-portal">
                     <img
                       src="/assets/pip_portrait.png"
@@ -612,7 +628,6 @@ export default function CatchDreamsGameSection() {
                       type="button"
                       className="btn btn-primary game-start-btn"
                       onClick={startGame}
-                      autoFocus
                     >
                       <span>Clock In — 30 Second Shift</span>
                       <span aria-hidden="true">✦</span>
@@ -893,7 +908,6 @@ export default function CatchDreamsGameSection() {
                   type="button"
                   className="btn btn-primary"
                   onClick={startGame}
-                  autoFocus
                 >
                   <span>Clock In Again ↺</span>
                   <span aria-hidden="true">✦</span>

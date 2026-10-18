@@ -18,20 +18,20 @@
   bottom: 0;
   left: 0;
   right: 0;
-  height: 92px;
-  background: linear-gradient(180deg, transparent 0%, rgba(255, 248, 241, 0.4) 40%, var(--color-bg) 100%);
+  height: 120px;
+  background: linear-gradient(180deg, transparent 0%, rgba(255, 248, 241, 0.45) 45%, var(--color-bg) 100%);
   pointer-events: none;
   z-index: 2;
 }
 
 [data-theme="midnight"] .hero-section::after {
-  background: linear-gradient(180deg, transparent 0%, rgba(24, 18, 34, 0.4) 40%, var(--color-bg) 100%);
+  background: linear-gradient(180deg, transparent 0%, rgba(24, 18, 34, 0.5) 45%, var(--color-bg) 100%);
 }
 
 @media (max-width: 960px) {
   .hero-section {
     min-height: auto;
-    padding: var(--space-2xl) 0 var(--space-3xl);
+    padding: var(--space-xl) 0 var(--space-2xl);
   }
 }
 
@@ -47,7 +47,7 @@
   .hero-grid {
     grid-template-columns: 1fr;
     text-align: center;
-    gap: var(--space-2xl);
+    gap: var(--space-xl);
   }
 }
 
@@ -125,7 +125,7 @@
   left: -2px;
   right: -2px;
   height: 6px;
-  background: linear-gradient(90deg, transparent 0%, var(--color-berry-subtle) 15%, var(--color-berry-subtle) 85%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, rgba(244, 178, 72, 0.35) 15%, var(--color-berry-subtle) 50%, rgba(244, 178, 72, 0.25) 85%, transparent 100%);
   z-index: -1;
   border-radius: var(--radius-pill);
 }
@@ -136,7 +136,7 @@
 }
 
 [data-theme="midnight"] .hero-heading .highlight-berry::after {
-  background: linear-gradient(90deg, transparent 0%, rgba(242, 138, 176, 0.35) 15%, rgba(255, 209, 102, 0.3) 85%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, rgba(242, 138, 176, 0.35) 15%, rgba(255, 209, 102, 0.35) 85%, transparent 100%);
   height: 5px;
 }
 
@@ -168,26 +168,52 @@
   display: flex;
   align-items: center;
   gap: var(--space-lg);
-  padding: 12px 20px;
-  background-color: var(--color-surface);
+  padding: 13px 22px;
+  background-color: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border: 1.5px solid var(--color-border-warm);
   border-radius: var(--radius-md);
-  max-width: 490px;
-  box-shadow: var(--shadow-sm), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  max-width: 500px;
+  box-shadow: var(--shadow-sm), 0 2px 8px rgba(61, 39, 29, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.8);
   position: relative;
-  transition: all var(--transition-normal);
+  transition: border-color var(--transition-normal), box-shadow var(--transition-normal), background-color var(--transition-normal);
 }
 
 [data-theme="midnight"] .hero-quick-specs {
-  background-color: #241b33;
+  background-color: rgba(36, 27, 51, 0.94);
   border-color: #4a375e;
-  box-shadow: var(--shadow-sm), 0 8px 20px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 209, 102, 0.12);
+  box-shadow: var(--shadow-sm), 0 8px 20px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 209, 102, 0.12);
 }
 
 @media (max-width: 960px) {
   .hero-quick-specs {
     justify-content: center;
   }
+}
+
+.spec-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.spec-item:not(:first-child) {
+  position: relative;
+  padding-left: var(--space-lg);
+}
+
+.spec-item:not(:first-child)::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 15%;
+  height: 70%;
+  width: 1px;
+  background: linear-gradient(180deg, transparent, var(--color-border-warm), transparent);
+}
+
+[data-theme="midnight"] .spec-item:not(:first-child)::before {
+  background: linear-gradient(180deg, transparent, #4a375e, transparent);
 }
 
 @media (max-width: 520px) {
@@ -206,6 +232,14 @@
     padding: 12px 14px;
   }
 
+  .spec-item:not(:first-child) {
+    padding-left: 0;
+  }
+
+  .spec-item:not(:first-child)::before {
+    display: none;
+  }
+
   .hero-cta-group {
     flex-direction: column;
     width: 100%;
@@ -214,11 +248,6 @@
   .hero-cta-group .btn {
     width: 100%;
   }
-}
-
-.spec-item {
-  display: flex;
-  flex-direction: column;
 }
 
 .spec-label {
@@ -266,23 +295,22 @@
   z-index: 3;
   width: 100%;
   max-width: 380px;
-  background-color: #faf3e8;
+  background: radial-gradient(circle at 50% 25%, #fffaf3 0%, #faf3e8 70%);
   border: 2px solid var(--color-border-warm);
   border-radius: 190px 190px var(--radius-xl) var(--radius-xl);
-  padding: 10px 10px 12px;
-  box-shadow: var(--shadow-lg), inset 0 0 0 1.5px rgba(244, 178, 72, 0.3), 0 12px 36px rgba(163, 64, 99, 0.12);
+  padding: 10px 10px 14px;
+  box-shadow: var(--shadow-lg), inset 0 0 0 1.5px rgba(244, 178, 72, 0.32), 0 14px 40px rgba(163, 64, 99, 0.12);
   overflow: hidden;
   transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
 }
 
 [data-theme="midnight"] .pip-storybook-portal {
-  background-color: #271e33;
+  background: radial-gradient(circle at 50% 25%, #2d223c 0%, #22182e 75%);
   border-color: #553e68;
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5), inset 0 0 0 1.5px rgba(255, 209, 102, 0.35), 0 0 30px rgba(199, 90, 132, 0.25);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.55), inset 0 0 0 1.5px rgba(255, 209, 102, 0.4), 0 0 32px rgba(199, 90, 132, 0.22);
 }
 
 .pip-storybook-portal:hover {
-  transform: translateY(-4px);
   border-color: var(--color-berry-border);
   box-shadow: var(--shadow-lg), var(--shadow-berry), inset 0 0 0 1.5px rgba(244, 178, 72, 0.45);
 }
@@ -290,6 +318,21 @@
 [data-theme="midnight"] .pip-storybook-portal:hover {
   border-color: rgba(255, 209, 102, 0.5);
   box-shadow: 0 20px 52px rgba(0, 0, 0, 0.6), inset 0 0 0 1.5px rgba(255, 209, 102, 0.5), 0 0 36px rgba(255, 209, 102, 0.3);
+}
+
+@media (max-width: 640px) {
+  .hero-visual-frame {
+    max-width: 320px;
+  }
+
+  .pip-storybook-portal {
+    max-width: 300px;
+    border-radius: 150px 150px var(--radius-lg) var(--radius-lg);
+  }
+
+  .hero-character-img {
+    border-radius: 140px 140px var(--radius-md) var(--radius-md);
+  }
 }
 
 /* Hero Character Image */
@@ -318,7 +361,7 @@
   align-items: center;
   gap: 8px;
   white-space: nowrap;
-  transition: all var(--transition-normal);
+  transition: border-color var(--transition-normal), box-shadow var(--transition-normal), background-color var(--transition-normal);
 }
 
 [data-theme="midnight"] .floating-dream-badge {
@@ -357,35 +400,39 @@
    Pip Living Personality & Thought Bubble (Part 9)
    ========================================================================== */
 
-/* Thought Bubble above Pip */
+/* Thought Bubble inside Pip's Storybook Portal */
 .pip-thought-bubble {
   position: absolute;
-  top: -24px;
+  top: 36px;
   left: 50%;
-  transform: translateX(-50%) translateY(8px);
-  z-index: 10;
+  transform: translateX(-50%) translateY(4px);
+  z-index: 5;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  gap: 6px;
   background-color: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1.5px solid var(--color-border-warm);
-  border-radius: var(--radius-pill);
-  padding: 7px 16px;
-  box-shadow: var(--shadow-md), 0 0 16px rgba(244, 178, 72, 0.15);
+  border-radius: var(--radius-lg);
+  padding: 6px 12px;
+  box-shadow: 0 4px 16px rgba(61, 39, 29, 0.08), 0 0 12px rgba(244, 178, 72, 0.2);
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.35s ease, transform 0.35s ease, visibility 0.35s ease;
   pointer-events: none;
-  max-width: 320px;
-  white-space: nowrap;
+  width: max-content;
+  max-width: 220px;
+  white-space: normal;
+  text-align: center;
+  box-sizing: border-box;
 }
 
 [data-theme="midnight"] .pip-thought-bubble {
   background-color: rgba(36, 26, 48, 0.96);
   border-color: #63477b;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 209, 102, 0.2);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45), 0 0 16px rgba(255, 209, 102, 0.2);
 }
 
 .pip-thought-bubble.is-visible {
@@ -395,14 +442,15 @@
 }
 
 .pip-thought-bubble .bubble-sparkle {
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   line-height: 1;
   color: var(--color-accent-gold);
+  flex-shrink: 0;
 }
 
 .pip-thought-bubble .bubble-text {
   font-family: var(--font-playful-rounded);
-  font-size: 0.8125rem;
+  font-size: 0.74rem;
   font-weight: 600;
   color: var(--color-berry);
   line-height: 1.25;
@@ -414,11 +462,11 @@
 
 .pip-thought-bubble .bubble-tail {
   position: absolute;
-  bottom: -6px;
+  bottom: -5px;
   left: 50%;
   transform: translateX(-50%) rotate(45deg);
-  width: 10px;
-  height: 10px;
+  width: 9px;
+  height: 9px;
   background-color: rgba(255, 255, 255, 0.96);
   border-right: 1.5px solid var(--color-border-warm);
   border-bottom: 1.5px solid var(--color-border-warm);
@@ -428,6 +476,31 @@
   background-color: rgba(36, 26, 48, 0.96);
   border-right-color: #63477b;
   border-bottom-color: #63477b;
+}
+
+@media (max-width: 640px) {
+  .pip-thought-bubble {
+    top: 26px;
+    max-width: 190px;
+    padding: 4px 9px;
+    gap: 4px;
+    border-radius: var(--radius-md);
+  }
+
+  .pip-thought-bubble .bubble-sparkle {
+    font-size: 0.78rem;
+  }
+
+  .pip-thought-bubble .bubble-text {
+    font-size: 0.68rem;
+    line-height: 1.2;
+  }
+
+  .pip-thought-bubble .bubble-tail {
+    width: 7px;
+    height: 7px;
+    bottom: -4px;
+  }
 }
 
 /* Personality State Reactions on Pip's Character Wrap */
@@ -499,7 +572,7 @@
   pointer-events: none;
   z-index: 1;
   background: radial-gradient(circle, rgba(244, 178, 72, 0.18) 0%, transparent 68%);
-  transition: all var(--transition-slow);
+  transition: background var(--transition-slow), opacity var(--transition-slow);
 }
 
 [data-theme="midnight"] .pip-celestial-halo {
@@ -524,7 +597,7 @@
 
 /* Floating Dream Badge State Transitions */
 .floating-dream-badge {
-  transition: all var(--transition-normal);
+  transition: border-color var(--transition-normal), box-shadow var(--transition-normal), opacity var(--transition-normal);
 }
 
 .floating-dream-badge.state-dreaming {
@@ -565,15 +638,27 @@
 /* Mobile Thought Bubble adaptations */
 @media (max-width: 480px) {
   .pip-thought-bubble {
-    top: -20px;
-    max-width: 270px;
-    white-space: normal;
-    text-align: center;
-    padding: 6px 12px;
+    top: 24px;
+    max-width: 180px;
+    padding: 4px 8px;
+    gap: 4px;
   }
 
   .pip-thought-bubble .bubble-text {
-    font-size: 0.75rem;
+    font-size: 0.66rem;
+    line-height: 1.2;
+  }
+}
+
+@media (max-width: 360px) {
+  .pip-thought-bubble {
+    top: 20px;
+    max-width: 165px;
+    padding: 3px 7px;
+  }
+
+  .pip-thought-bubble .bubble-text {
+    font-size: 0.63rem;
   }
 }
 

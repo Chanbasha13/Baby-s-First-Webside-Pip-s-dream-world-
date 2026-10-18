@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { playGentleChime } from '../utils/chimes';
 import { usePipPersonality } from '../context/PipPersonalityContext';
+import { SecretClueButton } from '../components/SecretDreamQuest';
 
 // ==========================================================================
 // Web Audio API Synthesizer for Lullaby Lab
@@ -305,6 +306,7 @@ function NightlightCollectionShowcase() {
         {/* Visual Frame with Working Light/Dim Toggle */}
         <div className={`nightlight-media-frame ${isRadiant ? 'mode-bright' : 'mode-dim'}`}>
           <div className="project-artwork-frame project-artwork-nightlight">
+            <SecretClueButton clueId="lantern" className="secret-clue-lantern" />
             <div className="nightlight-halo-glow" aria-hidden="true" />
             <img
               src="/assets/pip_dream_lantern.png"

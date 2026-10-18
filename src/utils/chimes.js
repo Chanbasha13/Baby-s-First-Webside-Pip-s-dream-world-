@@ -8,7 +8,11 @@ let soundEnabled = false;
 
 // Initialize from localStorage if available
 if (typeof window !== 'undefined') {
-  soundEnabled = localStorage.getItem('pip_sound_enabled') === 'true';
+  try {
+    soundEnabled = localStorage.getItem('pip_sound_enabled') === 'true';
+  } catch {
+    soundEnabled = false;
+  }
 }
 
 export function isSoundEnabled() {
@@ -18,7 +22,11 @@ export function isSoundEnabled() {
 export function setSoundEnabled(enabled) {
   soundEnabled = Boolean(enabled);
   if (typeof window !== 'undefined') {
-    localStorage.setItem('pip_sound_enabled', String(soundEnabled));
+    try {
+      localStorage.setItem('pip_sound_enabled', String(soundEnabled));
+    } catch {
+      // Storage access blocked or quota exceeded
+    }
   }
 }
 
@@ -225,4 +233,31 @@ export function playGameVictorySound(isCelebration = false) {
   setTimeout(() => playGentleChime(783.99, 0.18), 220);
   setTimeout(() => playGentleChime(isCelebration ? 1174.66 : 1046.5, 0.38), 330);
 }
+
+/**
+ * Play a delicate celestial trill when discovering a Secret Dream Quest clue.
+ * 3-note ascending celestial trill (F#5 -> A5 -> D6).
+ * Respects soundEnabled mute state.
+ */
+export function playQuestClueSound() {
+  if (!soundEnabled) return;
+  playGentleChime(739.99, 0.18); // F#5
+  setTimeout(() => playGentleChime(880.00, 0.18), 110); // A5
+  setTimeout(() => playGentleChime(1174.66, 0.35), 220); // D6
+}
+
+/**
+ * Play a rich, joyful celestial fanfare when unlocking Pip's Secret Letter.
+ * 5-note melodic cadence (D5 -> F#5 -> A5 -> B5 -> D6).
+ * Respects soundEnabled mute state.
+ */
+export function playQuestCompleteFanfare() {
+  if (!soundEnabled) return;
+  playGentleChime(587.33, 0.16); // D5
+  setTimeout(() => playGentleChime(739.99, 0.16), 110); // F#5
+  setTimeout(() => playGentleChime(880.00, 0.18), 220); // A5
+  setTimeout(() => playGentleChime(987.77, 0.20), 330); // B5
+  setTimeout(() => playGentleChime(1174.66, 0.55), 450); // D6
+}
+
 

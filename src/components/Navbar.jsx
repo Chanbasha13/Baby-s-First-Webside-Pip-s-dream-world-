@@ -17,9 +17,13 @@ export default function Navbar() {
       if (urlTheme === 'midnight') return true;
       if (urlTheme === 'day') return false;
 
-      const stored = localStorage.getItem('pip_theme');
-      if (stored === 'midnight') return true;
-      if (stored === 'light' || stored === 'day') return false;
+      try {
+        const stored = localStorage.getItem('pip_theme');
+        if (stored === 'midnight') return true;
+        if (stored === 'light' || stored === 'day') return false;
+      } catch {
+        // Storage access blocked or unavailable
+      }
     }
     return false; // Initial default: Day Mode
   });
@@ -44,17 +48,16 @@ export default function Navbar() {
 
   // Sync theme with root dataset, meta theme-color and localStorage
   useEffect(() => {
-    if (isMidnight) {
-      document.documentElement.setAttribute('data-theme', 'midnight');
-      localStorage.setItem('pip_theme', 'midnight');
-      const meta = document.querySelector('meta[name="theme-color"]');
-      if (meta) meta.setAttribute('content', '#181222');
-    } else {
-      document.documentElement.setAttribute('data-theme', 'day');
-      localStorage.setItem('pip_theme', 'day');
-      const meta = document.querySelector('meta[name="theme-color"]');
-      if (meta) meta.setAttribute('content', '#fff8f1');
+    const theme = isMidnight ? 'midnight' : 'day';
+    const color = isMidnight ? '#181222' : '#fff8f1';
+    document.documentElement.setAttribute('data-theme', theme);
+    try {
+      localStorage.setItem('pip_theme', theme);
+    } catch {
+      // Storage access blocked or quota exceeded
     }
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', color);
   }, [isMidnight]);
 
   // Close volume popover when clicking outside

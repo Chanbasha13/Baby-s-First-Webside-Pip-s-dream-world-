@@ -104,7 +104,7 @@
   font-weight: 600;
   color: var(--color-text-muted);
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: color var(--transition-fast), background-color var(--transition-fast), box-shadow var(--transition-fast);
   display: flex;
   align-items: center;
   gap: 6px;
@@ -230,7 +230,6 @@
 }
 
 .story-scene-row:hover {
-  transform: translateY(-3px);
   border-color: var(--color-berry-border);
   box-shadow: 0 0 0 1px rgba(163, 64, 99, 0.25) inset, var(--shadow-md), 0 10px 28px rgba(163, 64, 99, 0.08);
 }

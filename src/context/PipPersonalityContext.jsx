@@ -1,4 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, useRef, useCallback } from 'react';
+import { QUEST_CLUES, QUEST_CLUE_IDS } from '../data/questData';
+import { playQuestClueSound, playQuestCompleteFanfare } from '../utils/chimes';
 
 const PipPersonalityContext = createContext(null);
 
@@ -64,7 +66,6 @@ export function PipPersonalityProvider({ children }) {
     const handleUserActivity = () => {
       setPersonalityState((prev) => {
         if (prev === PIP_STATES.DREAMING) {
-          setMessageVisible(false);
           return PIP_STATES.WATCHFUL;
         }
         return prev;
@@ -90,18 +91,26 @@ export function PipPersonalityProvider({ children }) {
 
   const [hasUnlockedMoonSecret, setHasUnlockedMoonSecret] = useState(() => {
     if (typeof window !== 'undefined') {
-      const params = new URLSearchParams(window.location.search);
-      if (params.get('secret') === 'true') return true;
-      return localStorage.getItem('pip_moon_secret_unlocked') === 'true';
+      try {
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('secret') === 'true') return true;
+        return localStorage.getItem('pip_moon_secret_unlocked') === 'true';
+      } catch {
+        // Storage access blocked
+      }
     }
     return false;
   });
 
   const [hasCompletedGame, setHasCompletedGame] = useState(() => {
     if (typeof window !== 'undefined') {
-      const storedCompleted = localStorage.getItem('pip_game_completed') === 'true';
-      const storedScore = parseInt(localStorage.getItem('pip_dream_catch_best') || '0', 10);
-      return storedCompleted || storedScore > 0;
+      try {
+        const storedCompleted = localStorage.getItem('pip_game_completed') === 'true';
+        const storedScore = parseInt(localStorage.getItem('pip_dream_catch_best') || '0', 10);
+        return storedCompleted || storedScore > 0;
+      } catch {
+        // Storage access blocked
+      }
     }
     return false;
   });
@@ -133,6 +142,87 @@ export function PipPersonalityProvider({ children }) {
     });
   }, []);
 
+  // Secret Dream Quest State
+  const [questClues, setQuestClues] = useState(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const stored = localStorage.getItem('pip_dream_quest_clues');
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          if (Array.isArray(parsed)) {
+            return parsed.filter((id) => QUEST_CLUE_IDS.includes(id));
+          }
+        }
+      } catch {
+        // Storage disabled or quota error
+      }
+    }
+    return [];
+  });
+
+  const [activeQuestModal, setActiveQuestModal] = useState(null);
+
+  const recordQuestClue = useCallback(
+    (clueId) => {
+      if (!QUEST_CLUE_IDS.includes(clueId)) return false;
+
+      let isNew = false;
+      let nextClues = questClues;
+
+      if (!questClues.includes(clueId)) {
+        isNew = true;
+        nextClues = [...questClues, clueId];
+        setQuestClues(nextClues);
+        if (typeof window !== 'undefined') {
+          try {
+            localStorage.setItem('pip_dream_quest_clues', JSON.stringify(nextClues));
+          } catch {
+            // Ignored
+          }
+        }
+      }
+
+      playQuestClueSound();
+
+      if (isNew && nextClues.length === QUEST_CLUE_IDS.length) {
+        setTimeout(() => {
+          playQuestCompleteFanfare();
+        }, 380);
+        triggerReaction(
+          PIP_STATES.HAPPY,
+          'All three celestial tokens recovered! Pip unsealed the Secret Letter on his workbench. ✦',
+          6500
+        );
+      } else if (isNew) {
+        const clueInfo = QUEST_CLUES[clueId];
+        if (clueInfo?.pipReaction) {
+          triggerReaction(PIP_STATES.HAPPY, clueInfo.pipReaction, 4500);
+        }
+      }
+
+      setActiveQuestModal({ type: 'clue', clueId });
+      return true;
+    },
+    [questClues, triggerReaction]
+  );
+
+  const resetQuest = useCallback(() => {
+    setQuestClues([]);
+    setActiveQuestModal(null);
+    if (typeof window !== 'undefined') {
+      try {
+        localStorage.removeItem('pip_dream_quest_clues');
+      } catch {
+        // Ignored
+      }
+    }
+    triggerReaction(
+      PIP_STATES.CURIOUS,
+      'The celestial tokens have drifted back into the nursery. The quest begins anew! ✦',
+      4000
+    );
+  }, [triggerReaction]);
+
   const triggerMusicalStarChime = useCallback((starName, noteName) => {
     triggerReaction(PIP_STATES.CURIOUS, `Harmonic reading confirmed: ${starName} resonating at ${noteName}. Tine calibration holding steady. ✦`);
   }, [triggerReaction]);
@@ -140,7 +230,11 @@ export function PipPersonalityProvider({ children }) {
   const triggerMoonEasterEgg = useCallback(() => {
     setHasUnlockedMoonSecret(true);
     if (typeof window !== 'undefined') {
-      localStorage.setItem('pip_moon_secret_unlocked', 'true');
+      try {
+        localStorage.setItem('pip_moon_secret_unlocked', 'true');
+      } catch {
+        // Storage access blocked or quota exceeded
+      }
     }
     triggerReaction(PIP_STATES.CURIOUS, 'Observatory access granted. Log #777 unsealed — please handle with clean starlight gloves. ✦', 4500);
   }, [triggerReaction]);
@@ -157,7 +251,11 @@ export function PipPersonalityProvider({ children }) {
   const triggerGameCompletion = useCallback((score, isCelebration = false, isNewBest = false) => {
     setHasCompletedGame(true);
     if (typeof window !== 'undefined') {
-      localStorage.setItem('pip_game_completed', 'true');
+      try {
+        localStorage.setItem('pip_game_completed', 'true');
+      } catch {
+        // Storage access blocked or quota exceeded
+      }
     }
     let msg;
     if (isNewBest) {
@@ -212,6 +310,11 @@ export function PipPersonalityProvider({ children }) {
         triggerGameCompletion,
         triggerConstellationExplored,
         wakePip,
+        questClues,
+        recordQuestClue,
+        activeQuestModal,
+        setActiveQuestModal,
+        resetQuest,
       }}
     >
       {children}
@@ -240,6 +343,11 @@ export function usePipPersonality() {
       triggerGameCompletion: () => {},
       triggerConstellationExplored: () => {},
       wakePip: () => {},
+      questClues: [],
+      recordQuestClue: () => false,
+      activeQuestModal: null,
+      setActiveQuestModal: () => {},
+      resetQuest: () => {},
     };
   }
   return context;

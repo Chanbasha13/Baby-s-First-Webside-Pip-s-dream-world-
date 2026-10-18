@@ -90,6 +90,7 @@ export default function ConstellationAtlasSection() {
 
   return (
     <section id="constellation-atlas" className="atlas-section" aria-labelledby="atlas-heading">
+      <span id="atlas" aria-hidden="true" style={{ position: 'relative', top: '-80px', display: 'block' }} />
       <div className="container">
         {/* Section Header */}
         <div className="section-header-block atlas-header-block">

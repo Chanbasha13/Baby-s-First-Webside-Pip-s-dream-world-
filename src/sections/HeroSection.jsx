@@ -64,30 +64,32 @@ export default function HeroSection() {
               {/* Soft Ambient Celestial Halo behind Pip */}
               <div className={`pip-celestial-halo state-${personalityState}`} aria-hidden="true" />
 
-              {/* Pip's Living Thought/Whisper Bubble */}
-              <div
-                className={`pip-thought-bubble state-${personalityState} ${messageVisible ? 'is-visible' : ''}`}
-                role="status"
-                aria-live="polite"
-                aria-atomic="true"
-              >
-                <span className="bubble-sparkle" aria-hidden="true">
-                  {personalityState === PIP_STATES.DREAMING
-                    ? '💤'
-                    : personalityState === PIP_STATES.HAPPY
-                    ? '🎉'
-                    : personalityState === PIP_STATES.PROUD
-                    ? '🌟'
-                    : personalityState === PIP_STATES.CURIOUS
-                    ? '✨'
-                    : '✦'}
-                </span>
-                <span className="bubble-text">{currentMessage || 'Shhh… Pip dozed off mid-calibration.'}</span>
-                <span className="bubble-tail" aria-hidden="true" />
-              </div>
-
               {/* Arched Storybook Portal Frame */}
               <div className="pip-storybook-portal">
+                {/* Pip's Living Thought/Whisper Bubble — Positioned inside card arch above Pip */}
+                <div
+                  className={`pip-thought-bubble state-${personalityState} ${messageVisible ? 'is-visible' : ''}`}
+                  role="status"
+                  aria-live="polite"
+                  aria-atomic="true"
+                >
+                  <span className="bubble-sparkle" aria-hidden="true">
+                    {personalityState === PIP_STATES.DREAMING
+                      ? '💤'
+                      : personalityState === PIP_STATES.HAPPY
+                      ? '🎉'
+                      : personalityState === PIP_STATES.PROUD
+                      ? '🌟'
+                      : personalityState === PIP_STATES.CURIOUS
+                      ? '✨'
+                      : '✦'}
+                  </span>
+                  <span className="bubble-text">
+                    {currentMessage || 'Shhh… Pip dozed off mid-calibration. A tiny wrench is still in one paw.'}
+                  </span>
+                  <span className="bubble-tail" aria-hidden="true" />
+                </div>
+
                 <div
                   className={`pip-character-float-wrap state-${personalityState}`}
                   onClick={wakePip}

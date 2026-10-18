@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { SecretClueButton } from '../components/SecretDreamQuest';
 
 function Scene4DeliveryIllustration() {
   return (
@@ -121,7 +122,7 @@ export default function OriginStorySection() {
         'Late one quiet shift, Pip noticed a tiny, solitary star drifting just past the nursery rafters. Its pulse was pale and uneven, caught in a tangle of cold mist. Pip wondered whether fading dreams could be repaired with gentle patience, rather than left to wander the empty dark alone.',
       artwork: (
         <div className="scene-artwork-frame scene-frame-portrait">
-          <span className="flicker-star-anim" aria-hidden="true">✦</span>
+          <SecretClueButton clueId="star" className="secret-clue-star" />
           <img
             src="/assets/pip_portrait.png"
             alt="Pip inspecting the first little star in the nursery attic"

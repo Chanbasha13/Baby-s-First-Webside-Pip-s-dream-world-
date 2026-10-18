@@ -90,15 +90,19 @@ function setupOneTimeInteractionWake() {
 
 // Load stored preferences
 if (typeof window !== 'undefined') {
-  const savedVol = localStorage.getItem(STORAGE_VOL_KEY);
-  if (savedVol !== null) {
-    const parsed = parseFloat(savedVol);
-    if (!isNaN(parsed) && parsed >= 0 && parsed <= 1) {
-      volume = parsed;
+  try {
+    const savedVol = localStorage.getItem(STORAGE_VOL_KEY);
+    if (savedVol !== null) {
+      const parsed = parseFloat(savedVol);
+      if (!isNaN(parsed) && parsed >= 0 && parsed <= 1) {
+        volume = parsed;
+      }
     }
-  }
 
-  userHasExplicitlyPaused = localStorage.getItem(STORAGE_USER_PAUSED_KEY) === 'true';
+    userHasExplicitlyPaused = localStorage.getItem(STORAGE_USER_PAUSED_KEY) === 'true';
+  } catch {
+    // Storage access blocked or unavailable
+  }
 }
 
 function notifyListeners() {
@@ -222,7 +226,11 @@ export async function startLullaby({ isExplicitUserAction = false } = {}) {
     userHasExplicitlyPaused = false;
     wakePrompt = false;
     if (typeof window !== 'undefined') {
-      localStorage.setItem(STORAGE_USER_PAUSED_KEY, 'false');
+      try {
+        localStorage.setItem(STORAGE_USER_PAUSED_KEY, 'false');
+      } catch {
+        // Storage access blocked or quota exceeded
+      }
     }
   }
 
@@ -299,7 +307,11 @@ export function pauseLullaby({ isExplicitUserAction = false, isBackgroundHide = 
     wakePrompt = false;
     wasPlayingBeforeHide = false;
     if (typeof window !== 'undefined') {
-      localStorage.setItem(STORAGE_USER_PAUSED_KEY, 'true');
+      try {
+        localStorage.setItem(STORAGE_USER_PAUSED_KEY, 'true');
+      } catch {
+        // Storage access blocked or quota exceeded
+      }
     }
   } else if (isBackgroundHide) {
     wasPlayingBeforeHide = true;
@@ -428,7 +440,11 @@ export function setLullabyVolume(newVol) {
   }
 
   if (typeof window !== 'undefined') {
-    localStorage.setItem(STORAGE_VOL_KEY, clamped.toFixed(2));
+    try {
+      localStorage.setItem(STORAGE_VOL_KEY, clamped.toFixed(2));
+    } catch {
+      // Storage access blocked or quota exceeded
+    }
   }
 
   notifyListeners();

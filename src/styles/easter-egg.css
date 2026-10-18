@@ -13,10 +13,14 @@
   pointer-events: auto;
   border-radius: var(--radius-pill);
   outline: none;
-  transition: transform 200ms ease, filter 200ms ease;
+  transition: filter 200ms ease;
 }
 
 .crescent-moon-btn:hover {
+  filter: drop-shadow(0 0 16px rgba(244, 178, 72, 0.65));
+}
+
+.crescent-moon-btn:hover .crescent-moon-svg {
   transform: scale(1.08) rotate(4deg);
 }
 
@@ -156,12 +160,12 @@
   font-size: 0.92rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: background-color var(--transition-fast), box-shadow var(--transition-fast);
   box-shadow: 0 4px 14px rgba(163, 64, 99, 0.3);
 }
 
 .egg-close-btn:hover {
   background-color: var(--color-berry-hover);
-  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(163, 64, 99, 0.42);
 }
 

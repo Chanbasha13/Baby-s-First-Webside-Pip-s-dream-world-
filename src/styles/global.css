@@ -10,6 +10,8 @@
 @import './music-player.css';
 @import './game.css';
 @import './atlas.css';
+@import './quest.css';
+@import './persistent-celestial.css';
 
 /* ==========================================================================
    Global Reset & Base Setup
@@ -25,6 +27,10 @@ html {
   scroll-behavior: smooth;
   font-size: 16px;
   overflow-x: hidden;
+}
+
+section[id] {
+  scroll-margin-top: 80px;
 }
 
 :focus-visible {
@@ -103,6 +109,8 @@ img {
 
 .main-content {
   flex: 1 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
 .container {
@@ -193,12 +201,11 @@ img {
 
 .btn-primary:hover {
   background-color: var(--color-berry-hover);
-  transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(163, 64, 99, 0.38);
 }
 
 .btn-primary:active {
-  transform: translateY(0);
+  transform: scale(0.98);
 }
 
 [data-theme="midnight"] .btn-primary {
@@ -211,7 +218,6 @@ img {
   background-color: var(--color-berry-hover);
   border-color: var(--color-berry-hover);
   box-shadow: 0 6px 24px rgba(201, 92, 135, 0.5), 0 0 28px rgba(255, 209, 102, 0.2);
-  transform: translateY(-2px);
 }
 
 .btn-secondary {
@@ -225,12 +231,11 @@ img {
   background-color: var(--color-surface-subtle);
   border-color: var(--color-berry-border);
   color: var(--color-berry);
-  transform: translateY(-2px);
   box-shadow: var(--shadow-sm);
 }
 
 .btn-secondary:active {
-  transform: translateY(0);
+  transform: scale(0.98);
 }
 
 [data-theme="midnight"] .btn-secondary {
@@ -327,7 +332,7 @@ img {
   border-radius: var(--radius-pill);
   box-shadow: var(--shadow-xs);
   margin-bottom: var(--space-sm);
-  transition: all var(--transition-fast);
+  transition: border-color var(--transition-fast), background-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .chapter-roman-numeral {
@@ -435,7 +440,7 @@ img {
     --glare-x: 50%;
     --glare-y: 50%;
     --glare-opacity: 0;
-    transform: perspective(1000px) translateY(var(--tilt-lift)) rotateX(var(--tilt-rx)) rotateY(var(--tilt-ry));
+    transform: perspective(1000px) rotateX(var(--tilt-rx)) rotateY(var(--tilt-ry));
     transform-style: preserve-3d;
     transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease;
     position: relative;

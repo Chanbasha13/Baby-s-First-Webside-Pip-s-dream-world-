@@ -53,13 +53,13 @@
   --color-parchment-border: #dfc8b7;
   --color-ink-sepia: #5e4337;
 
-  /* Section Atmospheric Gradients (Day / Enchanted Twilight Warmth) */
-  --bg-story: linear-gradient(180deg, #fff8f1 0%, #fdf2e9 35%, #faf0ea 70%, #fef5ed 100%);
-  --bg-atlas: linear-gradient(180deg, #fef5ed 0%, #fbf0e4 30%, #f6ebde 65%, #fdf4ec 100%);
-  --bg-projects: linear-gradient(180deg, #fdf4ec 0%, #faefe2 30%, #fcf0e5 70%, #fff6ee 100%);
-  --bg-game: linear-gradient(180deg, #fff6ee 0%, #fcf0e6 30%, #f8ebe0 70%, #fdf4ed 100%);
-  --bg-guestbook: linear-gradient(180deg, #fdf4ed 0%, #f9ece4 35%, #f6e8e0 70%, #fef6f0 100%);
-  --bg-footer: linear-gradient(180deg, #fef6f0 0%, #f7ebe0 45%, #f3e4d5 100%);
+  /* Section Atmospheric Gradients (Day / Enchanted Twilight Warmth - Translucent for Persistent Celestial Layer) */
+  --bg-story: linear-gradient(180deg, rgba(255, 248, 241, 0.86) 0%, rgba(253, 242, 233, 0.82) 35%, rgba(250, 240, 234, 0.84) 70%, rgba(254, 245, 237, 0.86) 100%);
+  --bg-atlas: linear-gradient(180deg, rgba(254, 245, 237, 0.86) 0%, rgba(251, 240, 228, 0.82) 30%, rgba(246, 235, 222, 0.84) 65%, rgba(253, 244, 236, 0.86) 100%);
+  --bg-projects: linear-gradient(180deg, rgba(253, 244, 236, 0.86) 0%, rgba(250, 239, 226, 0.82) 30%, rgba(252, 240, 229, 0.84) 70%, rgba(255, 246, 238, 0.86) 100%);
+  --bg-game: linear-gradient(180deg, rgba(255, 246, 238, 0.86) 0%, rgba(252, 240, 230, 0.82) 30%, rgba(248, 235, 224, 0.84) 70%, rgba(253, 244, 237, 0.86) 100%);
+  --bg-guestbook: linear-gradient(180deg, rgba(253, 244, 237, 0.86) 0%, rgba(249, 236, 228, 0.82) 35%, rgba(246, 232, 224, 0.84) 70%, rgba(254, 246, 240, 0.86) 100%);
+  --bg-footer: linear-gradient(180deg, rgba(254, 246, 240, 0.88) 0%, rgba(247, 235, 224, 0.86) 45%, rgba(243, 228, 213, 0.90) 100%);
 
   /* Spacing Scale */
   --space-3xs: 2px;
@@ -137,13 +137,13 @@
   --color-parchment-border: #634b76;
   --color-ink-sepia: #e8d7cf;
 
-  /* Section Atmospheric Gradients (Midnight Deep Sky Journey) */
-  --bg-story: linear-gradient(180deg, #181222 0%, #140e1e 45%, #191225 100%);
-  --bg-atlas: linear-gradient(180deg, #191225 0%, #110b1d 50%, #171023 100%);
-  --bg-projects: linear-gradient(180deg, #171023 0%, #1b1328 50%, #160f22 100%);
-  --bg-game: linear-gradient(180deg, #160f22 0%, #1a1226 50%, #150f21 100%);
-  --bg-guestbook: linear-gradient(180deg, #150f21 0%, #1d142c 50%, #171023 100%);
-  --bg-footer: linear-gradient(180deg, #171023 0%, #100818 100%);
+  /* Section Atmospheric Gradients (Midnight Deep Sky Journey - Translucent for Persistent Celestial Layer) */
+  --bg-story: linear-gradient(180deg, rgba(24, 18, 34, 0.86) 0%, rgba(20, 14, 30, 0.82) 45%, rgba(25, 18, 37, 0.86) 100%);
+  --bg-atlas: linear-gradient(180deg, rgba(25, 18, 37, 0.86) 0%, rgba(17, 11, 29, 0.82) 50%, rgba(23, 16, 35, 0.86) 100%);
+  --bg-projects: linear-gradient(180deg, rgba(23, 16, 35, 0.86) 0%, rgba(27, 19, 40, 0.82) 50%, rgba(22, 15, 34, 0.86) 100%);
+  --bg-game: linear-gradient(180deg, rgba(22, 15, 34, 0.86) 0%, rgba(26, 18, 38, 0.82) 50%, rgba(21, 15, 33, 0.86) 100%);
+  --bg-guestbook: linear-gradient(180deg, rgba(21, 15, 33, 0.86) 0%, rgba(29, 20, 44, 0.82) 50%, rgba(23, 16, 35, 0.86) 100%);
+  --bg-footer: linear-gradient(180deg, rgba(23, 16, 35, 0.88) 0%, rgba(16, 8, 24, 0.92) 100%);
 
   --shadow-xs: 0 1px 3px rgba(0, 0, 0, 0.3);
   --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.4);

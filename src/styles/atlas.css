@@ -166,7 +166,7 @@
   font-weight: 600;
   color: var(--color-text-muted);
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: color var(--transition-fast), border-color var(--transition-fast), background-color var(--transition-fast), box-shadow var(--transition-fast);
   white-space: nowrap;
 }
 
@@ -174,7 +174,6 @@
   color: var(--color-berry);
   border-color: var(--color-berry-border);
   background-color: var(--color-berry-soft);
-  transform: translateY(-1px);
 }
 
 .atlas-tab-btn.is-selected {
@@ -639,7 +638,7 @@
   font-weight: 600;
   color: var(--color-text-main);
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
 }
 
 .pagination-btn:hover {
